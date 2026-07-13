@@ -1,0 +1,947 @@
+% ============================================================
+% 第1章：函数的概念——从输入输出到对应法则
+% ============================================================
+
+\chapter{函数的概念——从输入输出到对应法则}
+
+\begin{applicationbox}
+\textbf{学完本章你能做什么？}
+\begin{enumerate}
+  \item \textbf{学之前}：你会解方程，知道"x 等于多少"——但只能得到\textbf{一个数}。
+  \item \textbf{学之后}：你能描述"当 x 变化时，y 跟着怎么变"——从一个数扩展到\textbf{一整条线}。
+  \item \textbf{日常例子}：你打车，起步价 10 元，每公里 2 元。行驶里程不同，车费就不同。
+        如果里程是变量，车费就是\textbf{里程的函数}——输入一个里程，输出对应的车费。
+\end{enumerate}
+\end{applicationbox}
+
+
+% ============================================================
+\section{从方程到函数——为什么需要函数？}
+% ============================================================
+
+你已经会解方程了。比如：
+
+\[
+2x + 1 = 7
+\]
+
+解出来：\(x = 3\)。好，得到了一个数，问题结束。
+
+但现实世界不是这样的。现实中的问题通常是：
+
+\begin{center}
+\fcolorbox{blue!40}{blue!5}{\parbox{0.85\textwidth}{
+\textbf{问题：}出租车车费 = 起步价 10 元 + 每公里 2 元。\\
+你坐了多少公里？车费是多少？\textbf{——这取决于你坐了多远。}}}
+\end{center}
+
+你看，这里的车费\textbf{不是固定的一个数}，而是随着里程的变化而变化。\\
+如果里程是 \(x\) 公里，车费就是 \(10 + 2x\) 元。
+
+\begin{itemize}
+  \item \(x = 0\) 公里 \(\rightarrow\) 车费 = \(10 + 2\times 0 = 10\) 元
+  \item \(x = 3\) 公里 \(\rightarrow\) 车费 = \(10 + 2\times 3 = 16\) 元
+  \item \(x = 10\) 公里 \(\rightarrow\) 车费 = \(10 + 2\times 10 = 30\) 元
+  \item \(x = 15\) 公里 \(\rightarrow\) 车费 = \(10 + 2\times 15 = 40\) 元
+\end{itemize}
+
+\textbf{不同输入，产生不同输出}——这就是函数的核心思想。
+
+\begin{notebox}
+方程和函数的关键区别：
+\begin{itemize}
+  \item \textbf{方程}：\(2x + 1 = 7\)——你找的是\textbf{一个特定的数}让等式成立。
+  \item \textbf{函数}：\(y = 2x + 1\)——你问的是\textbf{当 x 变化时，y 怎么跟着变}。
+\end{itemize}
+用一句话说：\textbf{方程是找点，函数是看线。}
+\end{notebox}
+
+
+% ============================================================
+\section{函数的定义——什么是函数？}
+% ============================================================
+
+\subsection{从具体例子出发}
+
+先看三个例子：
+
+\begin{examplebox}[1]
+小明和小红在数轴上玩一个游戏：小明说出一个数，小红用规则算出另一个数。
+
+\begin{center}
+\begin{tabular}{c|c}
+\textbf{小明说的数（输入）} & \textbf{小红算出的数（输出）} \\
+\hline
+1 & 3 \\
+2 & 5 \\
+3 & 7 \\
+4 & 9 \\
+5 & 11 \\
+\end{tabular}
+\end{center}
+
+你能发现规律吗？\\
+小红每次都是把小明说的数 \textbf{乘以 2 再加 1}。\\
+如果小明说的数是 \(x\)，小红算出的数就是 \(2x + 1\)。
+\end{examplebox}
+
+\begin{examplebox}[2]
+一个正方形的边长变化时，面积怎么变？
+
+\begin{center}
+\begin{tabular}{c|c}
+\textbf{边长（cm）} & \textbf{面积（cm\(^2\)）} \\
+\hline
+1 & \(1\times1 = 1\) \\
+2 & \(2\times2 = 4\) \\
+3 & \(3\times3 = 9\) \\
+4 & \(4\times4 = 16\) \\
+\end{tabular}
+\end{center}
+
+规律：面积 = 边长 \(\times\) 边长。\\
+边长用 \(x\) 表示，面积就是 \(x^2\)。
+\end{examplebox}
+
+\begin{examplebox}[3]
+一杯热水在冷却，温度随时间变化（每分钟测一次）：
+
+\begin{center}
+\begin{tabular}{c|c}
+\textbf{时间（分钟）} & \textbf{温度（℃）} \\
+\hline
+0 & 80 \\
+1 & 72 \\
+2 & 65 \\
+3 & 59 \\
+4 & 54 \\
+\end{tabular}
+\end{center}
+
+温度随着时间增长而下降——这也是一个函数关系。
+\end{examplebox}
+
+这三个例子有一个共同特点：
+
+\begin{quote}
+\textbf{有一个输入，按照一个规则，得到一个输出。每个输入对应唯一的输出。}
+\end{quote}
+
+\subsection{函数的正式定义}
+
+\begin{definitionbox}[函数的概念]
+设 \(D\) 是一个非空数集。如果存在一个对应法则 \(f\)，使得对 \(D\) 中的\textbf{每一个}数 \(x\)，
+按照 \(f\) 都能\textbf{唯一确定}一个实数 \(y\)，那么称 \(f\) 是定义在 \(D\) 上的一个\textbf{函数}。
+
+记作：
+\[
+f: D \to \mathbb{R}, \qquad x \mapsto y
+\]
+
+其中：
+\begin{itemize}
+  \item \(x\) 叫\textbf{自变量}（读作 zì biàn liàng，英文 independent variable）
+  \item \(y\) 叫\textbf{因变量}（读作 yīn biàn liàng，英文 dependent variable）
+  \item \(D\) 叫\textbf{定义域}（读作 dìng yì yù，英文 domain）
+  \item 全体输出值组成的集合叫\textbf{值域}（读作 zhí yù，英文 range）
+  \item \(y\) 也记作 \(f(x)\)，读作"f of x"
+\end{itemize}
+\end{definitionbox}
+
+\begin{notebox}
+函数的三个要素缺一不可：
+\[
+\boxed{\mbox{定义域} \;+\; \mbox{对应法则} \;+\; \mbox{值域}}
+\]
+
+其中对应法则是\textbf{核心}，定义域是\textbf{前提}，值域是\textbf{结果}。
+\end{notebox}
+
+\subsection{用"黑箱"理解函数}
+
+想象一个黑箱：
+
+\begin{center}
+\fbox{
+\parbox{0.7\textwidth}{
+\[
+\xrightarrow{\;x\;}\;
+\fcolorbox{blue!30}{blue!10}{\parbox{0.3\textwidth}{\centering \textbf{函数 \(f\)}\\\small 输入 \(\to\) 规则 \(\to\) 输出}}
+\;\xrightarrow{\;f(x)\;}
+\]
+}}
+\end{center}
+
+你从左边放进一个 \(x\)，黑箱按照规则 \(f\) 处理，右边出来一个 \(f(x)\)。
+
+\begin{itemize}
+  \item 放进去 \(x=1\)，出来 \(f(1)\)
+  \item 放进去 \(x=2\)，出来 \(f(2)\)
+  \item 放进去 \(x=100\)，出来 \(f(100)\)
+\end{itemize}
+
+\textbf{每个输入只能出来一个输出}——这是函数最根本的规则。\\
+如果一个输入对应两个输出，那就不是函数。
+
+\begin{examplebox}[4]
+判断下面哪些是函数（用定义检验）：
+
+(1) \(y = 3x - 2\)，\(x \in \mathbb{R}\)
+
+解：对每个 \(x\)，\(3x - 2\) 唯一确定。\(\rightarrow\) \textbf{是函数}。
+
+(2) \(y^2 = x\)，\(x \ge 0\)
+
+解：当 \(x = 4\) 时，\(y^2 = 4\)，\(y = 2\) 或 \(y = -2\)。一个输入对应两个输出。\(\rightarrow\) \textbf{不是函数}。
+
+(3) 每个学生的身高
+
+解：输入是"学生"，输出是"身高（cm）"。每个学生只有一个身高。\(\rightarrow\) \textbf{是函数}。
+\end{examplebox}
+
+
+% ============================================================
+\section{函数的表示法}
+% ============================================================
+
+函数有三种常见的表示方式：
+
+\begin{definitionbox}[函数的三种表示法]
+\begin{enumerate}
+  \item \textbf{解析法}：用数学公式表示。例如 \(f(x) = x^2 + 1\)。
+  \item \textbf{列表法}：用表格列出输入和输出的对应值。
+  \item \textbf{图像法}：在坐标系中画出所有点 \((x, f(x))\)。
+\end{enumerate}
+三种方式各有优缺点，通常我们会结合使用。
+\end{definitionbox}
+
+\subsection{解析法——最精确}
+
+用公式表达对应法则，是最常用的方法。
+
+\begin{examplebox}[5]
+已知 \(f(x) = 2x^2 - 3x + 1\)，求 \(f(0)\)、\(f(1)\)、\(f(-2)\)、\(f(a)\)。
+
+解：
+\[
+\begin{aligned}
+f(0) &= 2 \times 0^2 - 3 \times 0 + 1 \\
+     &= 0 - 0 + 1 \\
+     &= 1
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+f(1) &= 2 \times 1^2 - 3 \times 1 + 1 \\
+     &= 2 \times 1 - 3 + 1 \\
+     &= 2 - 3 + 1 \\
+     &= 0
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+f(-2) &= 2 \times (-2)^2 - 3 \times (-2) + 1 \\
+      &= 2 \times 4 - (-6) + 1 \\
+      &= 8 + 6 + 1 \\
+      &= 15
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+f(a) &= 2 \times a^2 - 3 \times a + 1 \\
+     &= 2a^2 - 3a + 1
+\end{aligned}
+\]
+
+\textbf{重要：} \(f(a)\) 不是"f 乘以 a"，而是"把 \(a\) 代入函数 \(f\) 后得到的结果"。
+\end{examplebox}
+
+\subsection{列表法——最直观}
+
+把输入和输出列成表格，一目了然。
+
+\begin{examplebox}[6]
+一天中每个整点的气温：
+
+\begin{center}
+\begin{tabular}{c|c}
+\textbf{时间（时）} & \textbf{气温（℃）} \\
+\hline
+6 & 18 \\
+8 & 21 \\
+10 & 25 \\
+12 & 28 \\
+14 & 29 \\
+16 & 27 \\
+18 & 24 \\
+20 & 21 \\
+\end{tabular}
+\end{center}
+
+这就是用\textbf{列表法}表示的函数。
+\end{examplebox}
+
+\subsection{图像法——最形象}
+
+在平面直角坐标系中，把所有点 \((x, f(x))\) 画出来，就得到了函数的图像。
+
+\begin{examplebox}[7]
+画出 \(f(x) = x^2\) 的图像：
+
+先列表：
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c|c|c}
+\(x\) & -3 & -2 & -1 & 0 & 1 & 2 & 3 \\
+\hline
+\(f(x) = x^2\) & 9 & 4 & 1 & 0 & 1 & 4 & 9 \\
+\end{tabular}
+\end{center}
+
+把这些点 \((-3,9), (-2,4), (-1,1), (0,0), (1,1), (2,4), (3,9)\) 画在坐标系中，
+然后用平滑曲线连接——就得到了一个开口向上的抛物线。
+\end{examplebox}
+
+\begin{theorembox}[垂线检验法]
+如何判断一条曲线是不是函数的图像？
+
+\textbf{方法}：在图像上任意画一条竖直线（与 \(y\) 轴平行的线）。
+\begin{itemize}
+  \item 如果每条竖直线\textbf{最多只与图像交于一个点}，那么它是函数的图像。
+  \item 如果某条竖直线与图像交于两个或更多点，那么它不是函数的图像。
+\end{itemize}
+
+\textbf{原因}：一个 \(x\) 只能对应一个 \(y\)。如果一条竖直线 \(x = a\) 与图像有两个交点，
+意味着 \(x = a\) 对应两个不同的 \(y\) 值，违背了函数的定义。
+\end{theorembox}
+
+
+% ============================================================
+\section{定义域的求法——哪些 \(x\) 是允许的？}
+% ============================================================
+
+定义域是函数\textbf{所有允许的输入值}组成的集合。\\
+不是所有的数都能代入一个函数——有些输入会导致无意义的结果。
+
+\subsection{常见的限制条件}
+
+\begin{definitionbox}[定义域的常见限制]
+\begin{enumerate}
+  \item \textbf{分母不能为 0}：如果函数有分母，分母 \(\neq 0\)。
+  \item \textbf{偶次根号下非负}：\(\sqrt{\,\cdot\,}\) 里面必须 \(\ge 0\)。
+  \item \textbf{对数真数大于 0}：\(\ln(\,\cdot\,)\) 里面必须 \(> 0\)（以后学）。
+\end{enumerate}
+\end{definitionbox}
+
+\subsection{求定义域的例题}
+
+\begin{examplebox}[8]
+求 \(f(x) = \dfrac{1}{x - 3}\) 的定义域。
+
+解：
+\[
+\mbox{分母不能为 0} \;\Longrightarrow\; x - 3 \neq 0 \;\Longrightarrow\; x \neq 3
+\]
+
+用区间表示：
+\[
+(-\infty, 3) \cup (3, +\infty)
+\]
+
+读作："负无穷到 3，并上 3 到正无穷"。
+\end{examplebox}
+
+\begin{examplebox}[9]
+求 \(f(x) = \sqrt{5 - x}\) 的定义域。
+
+解：
+\[
+\mbox{根号下非负} \;\Longrightarrow\; 5 - x \ge 0 \;\Longrightarrow\; -x \ge -5 \;\Longrightarrow\; x \le 5
+\]
+
+用区间表示：\((-\infty, 5]\)。
+
+\textbf{注意：} \(x = 5\) 是允许的，因为 \(\sqrt{0} = 0\) 有意义，所以用\textbf{闭区间}。
+\end{examplebox}
+
+\begin{examplebox}[10]
+求 \(f(x) = \dfrac{1}{\sqrt{x + 2}}\) 的定义域。
+
+解：这里既有分母又有根号，需要\textbf{同时满足}两个条件：
+\[
+\begin{cases}
+\mbox{分母} \neq 0：& \sqrt{x + 2} \neq 0 \\
+\mbox{根号下} \ge 0：& x + 2 \ge 0
+\end{cases}
+\]
+
+由 \(\sqrt{x + 2} \neq 0\) 得：\(x + 2 \neq 0\)，即 \(x \neq -2\)。\\
+由 \(x + 2 \ge 0\) 得：\(x \ge -2\)。
+
+同时成立：\(x \ge -2\) 且 \(x \neq -2\)，即 \(x > -2\)。
+
+用区间表示：\((-2, +\infty)\)。
+
+\textbf{验证：}
+\begin{itemize}
+  \item \(x = -1\)：\(\dfrac{1}{\sqrt{-1 + 2}} = \dfrac{1}{\sqrt{1}} = 1\)，有意义 [OK]
+  \item \(x = -2\)：\(\dfrac{1}{\sqrt{-2 + 2}} = \dfrac{1}{0}\)，分母为 0，无意义 [X]
+  \item \(x = -3\)：\(\sqrt{-3 + 2} = \sqrt{-1}\)，负数开方，无意义 [X]
+\end{itemize}
+\end{examplebox}
+
+\begin{examplebox}[11]
+求 \(f(x) = \dfrac{1}{x^2 - 4}\) 的定义域。
+
+解：
+\[
+x^2 - 4 \neq 0 \;\Longrightarrow\; (x - 2)(x + 2) \neq 0 \;\Longrightarrow\; x \neq 2 \mbox{ 且 } x \neq -2
+\]
+
+用区间表示：
+\[
+(-\infty, -2) \cup (-2, 2) \cup (2, +\infty)
+\]
+
+画出数轴：
+\begin{center}
+\fbox{\parbox{0.6\textwidth}{
+\(-\infty\) \(\xrightarrow{\qquad}\) \(-2\) \(\xrightarrow{\qquad}\) \(2\) \(\xrightarrow{\qquad}\) \(+\infty\)\\
+\hspace*{1cm} \(-2\) 和 \(2\) 这两个点被挖掉了
+}}
+\end{center}
+\end{examplebox}
+
+\begin{examplebox}[12]
+求 \(f(x) = \sqrt{4 - x} + \dfrac{1}{x - 1}\) 的定义域。
+
+解：两个部分\textbf{同时要有意义}：
+\[
+\begin{cases}
+4 - x \ge 0 \;\Longrightarrow\; x \le 4 \\
+x - 1 \neq 0 \;\Longrightarrow\; x \neq 1
+\end{cases}
+\]
+
+所以定义域是 \((-\infty, 1) \cup (1, 4]\)。
+
+\textbf{验证：}
+\begin{itemize}
+  \item \(x = 0\)：\(\sqrt{4 - 0} + \dfrac{1}{0 - 1} = 2 - 1 = 1\) [OK]
+  \item \(x = 1\)：分母为 0 [X]
+  \item \(x = 4\)：\(\sqrt{4 - 4} + \dfrac{1}{4 - 1} = 0 + \dfrac{1}{3} = \dfrac{1}{3}\) [OK]
+  \item \(x = 5\)：\(\sqrt{4 - 5} = \sqrt{-1}\) [X]
+\end{itemize}
+\end{examplebox}
+
+
+% ============================================================
+\section{分段函数——不同区间，不同规则}
+% ============================================================
+
+有些函数在不同的输入范围内使用\textbf{不同的对应法则}——这叫分段函数。
+
+\begin{definitionbox}[分段函数]
+分段函数是指在不同区间上用不同表达式定义的函数。
+
+\[
+f(x) =
+\left\{
+\begin{array}{ll}
+\text{表达式一}, & x \text{ 在范围一内} \\
+\text{表达式二}, & x \text{ 在范围二内} \\
+\ldots
+\end{array}
+\right.
+\]
+\end{definitionbox}
+
+\begin{examplebox}[13]
+已知：
+\[
+f(x) =
+\begin{cases}
+x + 1, & x \ge 0 \\
+x^2,   & x < 0
+\end{cases}
+\]
+
+求 \(f(2)\)、\(f(-1)\)、\(f(0)\)。
+
+解：
+\begin{itemize}
+  \item \(f(2)\)：因为 \(2 \ge 0\)，代入 \(x + 1\)：\(2 + 1 = 3\)
+  \item \(f(-1)\)：因为 \(-1 < 0\)，代入 \(x^2\)：\((-1)^2 = 1\)
+  \item \(f(0)\)：因为 \(0 \ge 0\)（包含等号），代入 \(x + 1\)：\(0 + 1 = 1\)
+\end{itemize}
+
+\textbf{关键：} 先看 \(x\) 落在哪个区间，再代入对应的表达式。
+\end{examplebox}
+
+\begin{examplebox}[14——实际应用：阶梯电价]
+某城市的电费收费标准：
+\begin{itemize}
+  \item 每月用电量不超过 100 度，每度 0.5 元
+  \item 超过 100 度但不超过 300 度的部分，每度 0.7 元
+  \item 超过 300 度的部分，每度 1.0 元
+\end{itemize}
+
+用电量 \(x\)（度）和电费 \(f(x)\)（元）的关系：
+
+\[
+f(x) =
+\begin{cases}
+0.5x,                 & 0 \le x \le 100 \\
+50 + 0.7(x - 100),    & 100 < x \le 300 \\
+50 + 140 + 1.0(x - 300), & 300 < x
+\end{cases}
+\]
+
+计算：
+\begin{itemize}
+  \item 用电 80 度：\(0.5 \times 80 = 40\) 元
+  \item 用电 200 度：\(50 + 0.7 \times (200 - 100) = 50 + 70 = 120\) 元
+  \item 用电 400 度：\(50 + 140 + 1.0 \times (400 - 300) = 50 + 140 + 100 = 290\) 元
+\end{itemize}
+
+\textbf{这就是分段函数在生活中的一个典型应用。}
+\end{examplebox}
+
+
+% ============================================================
+\section{函数与方程的联系}
+% ============================================================
+
+函数和方程不是两件不相干的事——它们是\textbf{同一个硬币的两面}。
+
+\begin{examplebox}[15]
+看函数 \(y = 2x + 1\)。
+
+\begin{itemize}
+  \item 在函数视角中：当 \(x = 1\) 时，\(y = 3\)；当 \(x = 2\) 时，\(y = 5\)……
+  \item 在方程视角中：如果问"什么时候 \(y = 7\)？"——就是解方程 \(2x + 1 = 7\)，得 \(x = 3\)。
+\end{itemize}
+
+\textbf{方程的解 = 函数取特定值时对应的自变量值。}
+
+用图像来看：方程 \(2x + 1 = 7\) 的解，就是直线 \(y = 2x + 1\) 与水平线 \(y = 7\) 的交点的 \(x\) 坐标。
+\end{examplebox}
+
+
+% ============================================================
+\section{符号卡片}
+% ============================================================
+
+\begin{symbolcard}
+\(f\) & \verb|f| & 读作"f" & 表示一个函数的名字 \\
+\(f(x)\) & \verb|f(x)| & 读作"f of x" & 函数 \(f\) 在 \(x\) 处的值 \\
+\(f: D \to \mathbb{R}\) & \verb|f: D \to \mathbb{R}| & 读作"从 D 到实数集的映射" & \(f\) 的定义域是 \(D\)，值在实数中 \\
+\(x\) & \verb|x| & 读作"艾克斯" & 自变量，即输入 \\
+\(y\) & \verb|y| & 读作"歪" & 因变量，即输出 \\
+\(\mathbb{R}\) & \verb|\mathbb{R}| & 读作"实数集" & 全体实数的集合 \\
+\((-\infty, +\infty)\) & \verb|(-\infty, +\infty)| & 读作"负无穷到正无穷" & 全体实数 \\
+\(\cup\) & \verb|\cup| & 读作"并" & 集合的并运算 \\
+\end{symbolcard}
+
+
+% ============================================================
+\section{代码验证}
+% ============================================================
+
+\begin{lstlisting}[caption=用 Python 理解函数的概念]
+# 函数就是"输入$\to$规则$\to$输出"
+# 在 Python 中，函数也是用 def 定义的
+
+# 例1：出租车车费函数
+def car_fare(km):
+    """车费 = 起步价 10 + 每公里 2 元"""
+    return 10 + 2 * km
+
+print("=== 出租车函数 ===")
+for d in [0, 3, 10, 15]:
+    print(f"  行驶 {d:2d} 公里 $\to$ 车费 {car_fare(d):2d} 元")
+
+print()
+
+# 例2：f(x) = 2x^2 - 3x + 1
+def f(x):
+    return 2*x**2 - 3*x + 1
+
+print("=== f(x) = 2x² - 3x + 1 ===")
+for val in [0, 1, -2, 5]:
+    print(f"  f({val:3d}) = {f(val)}")
+
+print()
+
+# 例3：分段函数 f(x) = x+1 (x>=0), x² (x<0)
+def piecewise(x):
+    if x >= 0:
+        return x + 1
+    else:
+        return x**2
+
+print("=== 分段函数 ===")
+for val in [2, -1, 0, -3, 5]:
+    print(f"  f({val:3d}) = {piecewise(val)}")
+
+print()
+
+# 例4：求定义域（数值验证——代入测试）
+def test_domain(f, test_values):
+    """测试一些值是否在定义域内"""
+    for x in test_values:
+        try:
+            result = f(x)
+            print(f"  x = {x:4.1f} $\to$ f(x) = {result:.4f}  [OK]")
+        except (ZeroDivisionError, ValueError):
+            print(f"  x = {x:4.1f} -> 无定义 [X]")
+
+print("=== 测试 f(x) = 1/sqrt(x+2) 的定义域 ===")
+def g(x):
+    return 1 / (x + 2)**0.5
+
+test_domain(g, [-3, -2.5, -2, -1.5, -1, 0, 2, 5])
+\end{lstlisting}
+
+运行结果：
+\begin{lstlisting}[frame=none,backgroundcolor={},numbers=none]
+=== 出租车函数 ===
+  行驶  0 公里 -> 车费 10 元
+  行驶  3 公里 -> 车费 16 元
+  行驶 10 公里 -> 车费 30 元
+  行驶 15 公里 -> 车费 40 元
+
+=== f(x) = 2x^2 - 3x + 1 ===
+  f(  0) = 1
+  f(  1) = 0
+  f( -2) = 15
+  f(  5) = 36
+
+=== 分段函数 ===
+  f(  2) = 3
+  f( -1) = 1
+  f(  0) = 1
+  f( -3) = 9
+  f(  5) = 6
+
+=== 测试 f(x) = 1/sqrt(x+2) 的定义域 ===
+  x = -3.0 -> 无定义 [X]
+  x = -2.5 -> 无定义 [X]
+  x = -2.0 -> 无定义 [X]
+  x = -1.5 -> f(x) = 1.4142  [OK]
+  x = -1.0 -> f(x) = 1.0000  [OK]
+  x =  0.0 -> f(x) = 0.7071  [OK]
+  x =  2.0 -> f(x) = 0.5000  [OK]
+  x =  5.0 -> f(x) = 0.3780  [OK]
+\end{lstlisting}
+
+
+% ============================================================
+\section{本章小结}
+% ============================================================
+
+\begin{progressbox}
+函数的三要素：\textbf{定义域}（输入范围）+ \textbf{对应法则}（规则）+ \textbf{值域}（输出范围）
+
+三种表示法：\textbf{解析法}（公式）、\textbf{列表法}（表格）、\textbf{图像法}（图像）
+
+定义域的限制：分母 \(\neq 0\)、偶次根号下 \(\ge 0\)
+
+分段函数：不同区间用不同规则
+
+函数与方程的关系：方程的解是函数取特定值时的自变量值
+\end{progressbox}
+
+\subsection*{通往下一章}
+
+\textbf{这一章}你学会了什么是函数——输入经过规则产生唯一输出。
+
+\textbf{下一章}我们将学习\textbf{函数的图像}——把抽象的对应关系变成直观的图形。
+你会看到：一个函数长什么样？怎么从图像看出函数的性质？
+图像是连接代数与几何的第一座桥梁。
+
+
+% ============================================================
+% 习题
+% ============================================================
+\section{习题}
+
+% ===== 送分 =====
+
+\begin{exercise}[0]
+判断以下哪些是函数（回答"是"或"不是"）：
+\begin{enumerate}
+  \item[(1)] 每个学生的学号对应一个姓名
+  \item[(2)] \(y = \pm \sqrt{x}\)（\(x \ge 0\)）
+  \item[(3)] 每个时间点对应当时的室内温度
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[0]
+已知 \(f(x) = 2x + 5\)，求 \(f(1)\)、\(f(-3)\)、\(f(0)\)。
+\end{exercise}
+
+\begin{exercise}[0]
+已知 \(f(x) = x^2 - 1\)，求 \(f(2)\)、\(f(-1)\)、\(f(0)\)。
+\end{exercise}
+
+% ===== 简单 =====
+
+\begin{exercise}[1]
+求下列函数的定义域（用区间表示）：
+\begin{enumerate}
+  \item[(1)] \(f(x) = \dfrac{1}{x + 4}\)
+  \item[(2)] \(f(x) = \dfrac{1}{x - 5}\)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[1]
+求下列函数的定义域（用区间表示）：
+\begin{enumerate}
+  \item[(1)] \(f(x) = \sqrt{x - 3}\)
+  \item[(2)] \(f(x) = \sqrt{2x + 6}\)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[1]
+已知 \(f(x) = 3x - 2\)，求 \(f(1) + f(2)\) 和 \(f(1) \times f(2)\)。
+\end{exercise}
+
+% ===== 基础 =====
+
+\begin{exercise}[2]
+求下列函数的定义域（用区间表示）：
+\begin{enumerate}
+  \item[(1)] \(f(x) = \dfrac{1}{\sqrt{x - 2}}\)
+  \item[(2)] \(f(x) = \dfrac{1}{x^2 - 9}\)
+  \item[(3)] \(f(x) = \sqrt{4 - x} + \dfrac{1}{x}\)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[2]
+已知：
+\[
+f(x) =
+\begin{cases}
+2x + 1, & x \ge 0 \\
+x - 3,  & x < 0
+\end{cases}
+\]
+求 \(f(2)\)、\(f(-1)\)、\(f(0)\)、\(f(-5)\)。
+\end{exercise}
+
+\begin{exercise}[2]
+判断下列每组中的两个函数是否相同，并说明理由：
+\begin{enumerate}
+  \item[(1)] \(f(x) = x\)，\(g(x) = \dfrac{x^2}{x}\)
+  \item[(2)] \(f(x) = \sqrt{x^2}\)，\(g(x) = |x|\)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[2]
+已知 \(f(x) = x^2 + 2x\)，求 \(f(a)\)、\(f(a + 1)\)、\(f(2a)\)。
+\end{exercise}
+
+% ===== 普通 =====
+
+\begin{exercise}[3]
+求下列函数的定义域（用区间表示）：
+\begin{enumerate}
+  \item[(1)] \(f(x) = \dfrac{\sqrt{x - 1}}{x - 5}\)
+  \item[(2)] \(f(x) = \dfrac{1}{\sqrt{x^2 - 4}}\)
+  \item[(3)] \(f(x) = \sqrt{9 - x^2} + \dfrac{1}{x - 2}\)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[3]
+已知 \(f(x) = 2x^2 - x + 1\)，求：
+\begin{enumerate}
+  \item[(1)] \(f(2) - f(1)\)
+  \item[(2)] \(\dfrac{f(3) - f(1)}{2}\)
+  \item[(3)] \(f(a + h) - f(a)\)（在草稿上展开）
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[3]
+已知 \(f(x) = \dfrac{x}{1 - x}\)（\(x \neq 1\)），求 \(f(2)\)、\(f(0)\)、\(f(-1)\)，以及 \(f(f(2))\)。
+\end{exercise}
+
+\begin{exercise}[3]
+画出下列函数的草图（取 5-8 个关键点，描点连线）：
+\begin{enumerate}
+  \item[(1)] \(f(x) = x^3\)，取 \(x = -2, -1, 0, 1, 2\)
+  \item[(2)] \(f(x) = \dfrac{1}{x}\)（\(x \neq 0\)），取 \(x = -3, -2, -1, 1, 2, 3\)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[3]
+已知：
+\[
+f(x) =
+\begin{cases}
+x^2 + 1, & x \le 0 \\
+x - 2,   & 0 < x < 3 \\
+2x,      & x \ge 3
+\end{cases}
+\]
+求 \(f(-2)\)、\(f(0)\)、\(f(2)\)、\(f(3)\)、\(f(5)\)。
+\end{exercise}
+
+\begin{exercise}[3]
+已知 \(f(x + 1) = x^2 + 2x\)，求 \(f(3)\)（提示：令 \(t = x + 1\)）。
+\end{exercise}
+
+\begin{exercise}[3]
+一个长方形的长比宽多 3 cm。设宽为 \(x\) cm，面积为 \(S(x)\) cm\(^2\)。
+\begin{enumerate}
+  \item[(1)] 写出 \(S(x)\) 的表达式
+  \item[(2)] 写出定义域（考虑到实际意义）
+  \item[(3)] 求 \(S(4)\) 和 \(S(10)\)
+\end{enumerate}
+\end{exercise}
+
+% ===== 中等 =====
+
+\begin{exercise}[4]
+求下列函数的定义域（用区间表示）：
+\begin{enumerate}
+  \item[(1)] \(f(x) = \dfrac{1}{\sqrt{|x| - 3}}\)
+  \item[(2)] \(f(x) = \dfrac{\sqrt{x + 3}}{x^2 - 5x + 6}\)
+  \item[(3)] \(f(x) = \dfrac{1}{\sqrt{2x - x^2}}\)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[4]
+已知 \(f(x)\) 的定义域是 \([0, 3]\)，求：
+\begin{enumerate}
+  \item[(1)] \(f(x + 1)\) 的定义域
+  \item[(2)] \(f(2x)\) 的定义域
+  \item[(3)] \(f(2x - 1)\) 的定义域
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[4]
+已知：
+\[
+f(x) =
+\begin{cases}
+x + 1, & x < 0 \\
+2x,    & x \ge 0
+\end{cases}
+\]
+\begin{enumerate}
+  \item[(1)] 求 \(f(f(-1))\)
+  \item[(2)] 求 \(f(f(2))\)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[4]
+已知 \(f(2x + 1) = x^2 + 3x - 2\)，求 \(f(x)\) 的表达式（提示：用换元法）。
+\end{exercise}
+
+\begin{exercise}[4]
+一个游泳池有进水口和排水口。单独开进水口 3 小时注满，单独开排水口 5 小时排空。
+如果先开进水口 1 小时，然后同时开排水口，设从开始起经过 \(t\) 小时后的水量为 \(V(t)\)。
+\begin{enumerate}
+  \item[(1)] 写出 \(V(t)\) 的分段表达式
+  \item[(2)] 多少小时后池子里的水最多？
+  \item[(3)] 何时池子排空？
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[4]
+已知 \(f(x) = |x - 2| + |x + 1|\)。
+\begin{enumerate}
+  \item[(1)] 用分段函数的形式表示 \(f(x)\)（提示：分三段讨论）
+  \item[(2)] 求 \(f(-2)\)、\(f(0)\)、\(f(3)\)
+  \item[(3)] \(f(x)\) 有最小值吗？如果有，是多少？
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[4]
+已知 \(f(x) + f(x - 1) = 2x^2\)，且 \(f(0) = 1\)，求 \(f(1)\)、\(f(2)\)、\(f(3)\)。
+\end{exercise}
+
+% ===== 进阶 =====
+
+\begin{exercise}[5]
+求函数 \(f(x) = \dfrac{1}{\sqrt{4 - x^2}} + \dfrac{\sqrt{x + 1}}{x}\) 的定义域。
+\end{exercise}
+
+\begin{exercise}[5]
+已知函数 \(f(x)\) 的定义域是 \([-1, 2]\)，求下列函数的定义域：
+\begin{enumerate}
+  \item[(1)] \(f(x^2)\)
+  \item[(2)] \(f(2x - 1) + f(x + 1)\)
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[5]
+已知：
+\[
+f(x) =
+\begin{cases}
+x^2, & x \ge 0 \\
+-x,  & x < 0
+\end{cases}
+\]
+求使得 \(f(x) = 4\) 的所有 \(x\)。
+\end{exercise}
+
+\begin{exercise}[5]
+已知 \(f(x) + 2f\left(\dfrac{1}{x}\right) = 3x\)（\(x \neq 0\)），求 \(f(x)\)。
+（提示：用 \(\dfrac{1}{x}\) 代换 \(x\) 得到另一个方程，然后联立求解。）
+\end{exercise}
+
+% ===== 拔高 =====
+
+\begin{exercise}[6]
+求函数 \(f(x) = \sqrt{x^2 - x - 6} + \dfrac{1}{\sqrt{9 - x^2}}\) 的定义域，并用区间表示。
+\end{exercise}
+
+\begin{exercise}[6]
+已知函数 \(f(x)\) 对任意实数 \(x, y\) 都满足 \(f(x + y) = f(x) + f(y)\)，且 \(f(1) = 2\)。
+\begin{enumerate}
+  \item[(1)] 求 \(f(0)\)、\(f(2)\)、\(f(3)\)
+  \item[(2)] 猜想 \(f(n)\) 的表达式（\(n\) 为正整数）
+  \item[(3)] 求 \(f\left(\dfrac{1}{2}\right)\)（提示：利用 \(f\left(\dfrac{1}{2} + \dfrac{1}{2}\right) = f(1)\)）
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[6]
+已知：
+\[
+f(x) =
+\begin{cases}
+|x - 1|,  & x \le 2 \\
+x^2 - 4x + 5, & x > 2
+\end{cases}
+\]
+\begin{enumerate}
+  \item[(1)] 化简 \(f(x)\) 为不含绝对值的形式
+  \item[(2)] 求 \(f(f(f(-1)))\)
+\end{enumerate}
+\end{exercise}
+
+% ===== 极难 =====
+
+\begin{exercise}[7]
+已知函数 \(f(x)\) 的定义域为 \(\mathbb{R}\)，且对任意实数 \(x, y\) 都有：
+\[
+f(x + y) = f(x) + f(y)
+\]
+同时已知 \(f(1) = 2\)。
+
+\begin{enumerate}
+  \item[(1)] 证明 \(f(0) = 0\)，且 \(f(-x) = -f(x)\) 对所有实数 \(x\) 成立。
+  \item[(2)] 证明对所有有理数 \(q\)（可以写成 \(\dfrac{m}{n}\) 形式的数），\(f(q) = 2q\)。
+  \item[(3)] 证明：如果 \(f\) 在 \(x = 0\) 处连续（以后学），那么对所有实数 \(x\) 有 \(f(x) = 2x\)。
+\end{enumerate}
+
+\textbf{说明：} 这道题展示了如何从几个基本性质出发，推导出整个函数的形式。
+这是数学分析中"由性质确定函数"思想的雏形。
+\end{exercise}
+
+

@@ -1,0 +1,56 @@
+% ch30: 多元微分学初步
+\chapter{多元微分学初步——偏导、全微分、极值}
+\begin{applicationbox}
+学完本章：多元函数、偏导数、全微分、条件极值
+\end{applicationbox}
+\section{多元函数} \(z=f(x,y)\)，定义域为平面点集。
+
+\section{偏导数} \(f_x(x,y)=\lim_{h\to0}\frac{f(x+h,y)-f(x,y)}{h}\)，\(f_y\) 类似。
+\begin{examplebox}[1] \(f(x,y)=x^2y+xy^2\)，\(f_x=2xy+y^2\)，\(f_y=x^2+2xy\)\end{examplebox}
+
+\section{全微分} \(df = f_x dx + f_y dy\)——函数值的线性近似。
+
+\section{条件极值与拉格朗日乘数法} 在条件 \(g(x,y)=0\) 下求极值，设 \(L(x,y,\lambda)=f(x,y)+\lambda g(x,y)\)。
+
+\section{混合偏导的相等（ε-δ 证明）}
+\textbf{定理：} 若 \(f_{xy}\) 和 \(f_{yx}\) 在 \((x_0,y_0)\) 处连续，则 \(f_{xy}(x_0,y_0)=f_{yx}(x_0,y_0)\)。
+
+\textbf{证明：} 令
+\(\Delta = f(x_0+h,y_0+k)-f(x_0+h,y_0)-f(x_0,y_0+k)+f(x_0,y_0)\)。
+构造函数 \(g(y)=f(x_0+h,y)-f(x_0,y)\)，则 \(\Delta = g(y_0+k)-g(y_0)\)。
+由中值定理，存在 \(\eta\) 在 \(y_0\) 与 \(y_0+k\) 之间使 \(\Delta = g'(\eta)k = [f_y(x_0+h,\eta)-f_y(x_0,\eta)]k\)。
+再对 \(x\) 用中值定理，存在 \(\xi\) 在 \(x_0\) 与 \(x_0+h\) 之间使 \(\Delta = f_{xy}(\xi,\eta)hk\)。
+同理交换顺序得 \(\Delta = f_{yx}(\xi',\eta')hk\)。
+令 \(h,k\to0\)，由连续性得 \(f_{xy}(x_0,y_0)=f_{yx}(x_0,y_0)\)。\(\blacksquare\)
+
+\section{习题}
+\begin{exercise}[0] 偏导数 \(f_x\) 的定义是什么？\end{exercise}
+\begin{exercise}[0] 全微分的公式是什么？\end{exercise}
+\begin{exercise}[0] 拉格朗日乘数法用于什么问题？\end{exercise}
+\begin{exercise}[0] 混合偏导数 \(f_{xy}\) 和 \(f_{yx}\) 在什么条件下相等？\end{exercise}
+\begin{exercise}[1] 求 \(f(x,y)=x^2+y^2\) 的 \(f_x\) 和 \(f_y\)。\end{exercise}
+\begin{exercise}[1] 求 \(f(x,y)=\sin(xy)\) 的 \(f_x\)。\end{exercise}
+\begin{exercise}[1] 求 \(f(x,y)=e^{xy}\) 的 \(f_y\)。\end{exercise}
+\begin{exercise}[1] 求 \(f(x,y)=x^2y\) 的 \(f_x(1,2)\)。\end{exercise}
+\begin{exercise}[2] 求 \(f(x,y)=x^3y^2\) 的 \(f_{xy}\)。\end{exercise}
+\begin{exercise}[2] 求 \(f(x,y)=x\ln y\) 的全微分。\end{exercise}
+\begin{exercise}[2] 求 \(f(x,y)=e^{x^2+y^2}\) 的偏导数。\end{exercise}
+\begin{exercise}[2] 求 \(z=\arctan\frac{y}{x}\) 的偏导数。\end{exercise}
+\begin{exercise}[3] 求 \(f(x,y)=x^3-3xy+y^2\) 的极值。\end{exercise}
+\begin{exercise}[3] 求 \(f(x,y)=x^2+xy+y^2-3x\) 的极值。\end{exercise}
+\begin{exercise}[3] 求 \(f(x,y)=x^2-y^2\) 的极值（鞍点）。\end{exercise}
+\begin{exercise}[3] 求 \(z=x^3+y^3-3xy\) 的极值。\end{exercise}
+\begin{exercise}[3] 求 \(f(x,y)=e^{2x}(x+y^2)\) 的极值。\end{exercise}
+\begin{exercise}[4] 证明 \(f(x,y)=\sqrt{x^2+y^2}\) 在 \((0,0)\) 处不可微。\end{exercise}
+\begin{exercise}[4] 求 \(f(x,y)=x^2y^2\) 在 \(x^2+y^2=1\) 下的极值（拉格朗日）。\end{exercise}
+\begin{exercise}[4] 求原点到平面 \(x+2y+3z=6\) 的最短距离。\end{exercise}
+\begin{exercise}[4] 求 \(f(x,y)=xy\) 在 \(x+y=1\) 下的极值。\end{exercise}
+\begin{exercise}[4] 造一个容积为 \(V\) 的无盖长方体水箱，求最小表面积。\end{exercise}
+\begin{exercise}[5] 求 \(f(x,y,z)=xyz\) 在 \(x^2+y^2+z^2=1\) 下的极值。\end{exercise}
+\begin{exercise}[5] 证明隐函数定理：若 \(F(x_0,y_0)=0\)，\(F_y\neq0\)，则存在隐函数 \(y=y(x)\)。\end{exercise}
+\begin{exercise}[5] 求 \(x^2+y^2+z^2=1\) 下 \(f=x+2y+3z\) 的最值。\end{exercise}
+\begin{exercise}[5] 求 \(f(x,y)=x^2-xy+y^2\) 在 \(x^2+y^2\le1\) 上的最值。\end{exercise}
+\begin{exercise}[6] 证明泰勒公式对多元函数成立。\end{exercise}
+\begin{exercise}[6] 求 \(f(x,y)=\sin x\sin y\) 的极值。\end{exercise}
+\begin{exercise}[6] 用拉格朗日乘数法推导最小二乘法公式。\end{exercise}
+\begin{exercise}[7] 证明：若 \(f_{xy}\) 和 \(f_{yx}\) 连续，则 \(f_{xy}=f_{yx}\)。\end{exercise}

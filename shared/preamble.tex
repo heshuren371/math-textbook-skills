@@ -1,0 +1,169 @@
+% ============================================================
+% 《数学分析基础》共享导言区
+% ============================================================
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\geometry{a4paper, margin=2cm, top=2.5cm, bottom=2.5cm}
+
+\usepackage[most]{tcolorbox}
+\usepackage{graphicx, array, booktabs, multirow}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!60!black, urlcolor=blue!60!black}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fontspec}
+
+% ── 中文字体 ──
+\setmainfont{Times New Roman}
+\setCJKmainfont{PingFang SC}
+
+% ── 图表路径 ──
+\graphicspath{{figures/}}
+
+% ── 代码块样式 ──
+\lstdefinestyle{pystyle}{
+  language=Python,
+  basicstyle=\small\ttfamily,
+  backgroundcolor=\color{gray!5},
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  breaklines=true,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green!40!black},
+  stringstyle=\color{orange!70!black},
+}
+\lstset{style=pystyle}
+
+% ── 章节标题 ──
+\renewcommand{\thechapter}{\arabic{chapter}}
+
+% ── 页眉页脚 ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\leftmark}
+\fancyhead[RO]{\rightmark}
+\fancyfoot[C]{\thepage}
+
+% ============================================================
+% 定理类环境（颜色编码）
+% ============================================================
+
+% 定义框（绿色）
+\newtcolorbox{definitionbox}[1][]{
+  colback=green!5!white, colframe=green!60!black,
+  fonttitle=\bfseries, title=定义~#1
+}
+
+% 定理框（蓝色）
+\newtcolorbox{theorembox}[1][]{
+  colback=blue!5!white, colframe=blue!60!black,
+  fonttitle=\bfseries, title=定理~#1
+}
+
+% 命题框（紫色）
+\newtcolorbox{propositionbox}[1][]{
+  colback=purple!5!white, colframe=purple!60!black,
+  fonttitle=\bfseries, title=命题~#1
+}
+
+% 例题框（橙色）
+\newtcolorbox{examplebox}[1][]{
+  colback=orange!5!white, colframe=orange!70!black,
+  fonttitle=\bfseries, title=例题~#1
+}
+
+% 注意框（红色）
+\newtcolorbox{notebox}[1][]{
+  colback=red!5!white, colframe=red!60!black,
+  fonttitle=\bfseries, title=注意~#1
+}
+
+% 进步宣言框（黄色）
+\newtcolorbox{progressbox}{
+  colback=yellow!10!white, colframe=yellow!60!orange,
+  fonttitle=\bfseries\large, title=进步宣言
+}
+
+% 应用引导框（青色）
+\newtcolorbox{applicationbox}{
+  colback=teal!5!white, colframe=teal!60!black,
+  fonttitle=\bfseries\large, title=学完本章你能做什么？
+}
+
+% 符号卡片（灰色）
+\newenvironment{symbolcard}{%
+  \par\vspace{6pt}
+  \noindent\begin{tcolorbox}[colback=gray!3!white, colframe=gray!50!black, arc=2pt, title=📖 符号卡片]
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{c|c|p{3.5cm}|p{5cm}}
+  \toprule
+  \bfseries 符号 & \bfseries LaTeX 写法 & \bfseries 读法 & \bfseries 含义 \\
+  \midrule
+}{%
+  \bottomrule \end{tabular} \end{tcolorbox} \par\vspace{6pt}
+}
+
+% ============================================================
+% 习题环境
+% ============================================================
+
+\newcounter{exercise}[chapter]
+\renewcommand{\theexercise}{\thechapter.\arabic{exercise}}
+
+\makeatletter
+\newcommand{\difficulty}[1]{%
+  \ifcase#1
+    \textcolor{gray}{[送]}%
+  \or
+    \textcolor{gray}{[简]}%
+  \or
+    \textcolor{green!40!black}{[基]}%
+  \or
+    \textcolor{blue}{[普]}%
+  \or
+    \textcolor{orange}{[中]}%
+  \or
+    \textcolor{red}{[进]}%
+  \or
+    \textcolor{purple}{[拔]}%
+  \or
+    \textcolor{red!70!black}{[极]}%
+  \or
+    \textcolor{red!90!black}{[竞]}%
+  \fi
+}
+\makeatother
+
+\newenvironment{exercise}[1][0]{% 参数：难度等级 0-9
+  \refstepcounter{exercise}
+  \par\vspace{8pt}
+  \noindent
+  \textbf{练习 \theexercise}~\difficulty{#1}\quad
+  \ignorespaces
+}{\par\vspace{4pt}}
+
+% 答案环境（放附录）
+\newenvironment{answer}[1]{% 参数：练习编号
+  \par\vspace{6pt}
+  \noindent\textbf{#1}\quad
+  \ignorespaces
+}{\par\vspace{4pt}}
+
+% ============================================================
+% 其他设置
+% ============================================================
+
+% 图片不浮动（保持位置）
+\setcounter{topnumber}{5}
+\setcounter{bottomnumber}{5}
+\setcounter{totalnumber}{10}
+
+% 列表紧凑
+\setlist{nosep}
+
+

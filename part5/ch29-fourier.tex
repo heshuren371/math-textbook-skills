@@ -1,0 +1,51 @@
+% ch29: 傅里叶级数
+\chapter{傅里叶级数——周期函数的频谱分解}
+\begin{applicationbox}
+学完本章：将周期函数分解为正弦余弦的和
+\end{applicationbox}
+\section{傅里叶级数} \(f(x)\sim\frac{a_0}{2}+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx)\)
+\(a_n=\frac1\pi\int_{-\pi}^\pi f(x)\cos nx dx\)，\(b_n=\frac1\pi\int_{-\pi}^\pi f(x)\sin nx dx\)
+
+\section{收敛定理} 若 \(f\) 分段光滑，则傅里叶级数在连续点收敛到 \(f(x)\)，在间断点收敛到左右极限平均值。
+
+\textbf{ε-N 证明思路（狄利克雷核）：} 傅里叶级数的部分和可写为
+\[
+S_n(x)=\frac1\pi\int_{-\pi}^\pi f(t)D_n(t-x)dt,\quad
+D_n(u)=\frac{\sin(n+\frac12)u}{2\sin\frac u2}
+\]
+其中 \(D_n\) 是狄利克雷核。由 Riemann-Lebesgue 引理，
+当 \(n\to\infty\) 时，\(S_n(x)\to f(x)\)（在连续点处）。
+精确的 ε-N 论证需将积分拆为 \(|t-x|<\delta\) 和 \(|t-x|>\delta\) 两部分：
+前一部分用 \(f\) 的连续性控制，后一部分用 Riemann-Lebesgue 引理（\(\varepsilon\) 任意小）。\(\blacksquare\)
+
+\section{习题}
+\begin{exercise}[0] 傅里叶级数的系数公式是什么？\end{exercise}
+\begin{exercise}[0] 周期函数的傅里叶级数表示什么？\end{exercise}
+\begin{exercise}[0] 偶函数的傅里叶级数有什么特点？\end{exercise}
+\begin{exercise}[0] 奇函数的傅里叶级数有什么特点？\end{exercise}
+\begin{exercise}[1] 求 \(f(x)=x\)（\(-\pi<x<\pi\)）的傅里叶级数。\end{exercise}
+\begin{exercise}[1] 求 \(f(x)=1\) 的傅里叶级数。\end{exercise}
+\begin{exercise}[1] 判断 \(f(x)=x^2\) 的傅里叶级数只有哪些项？\end{exercise}
+\begin{exercise}[1] 若 \(f\) 是偶函数，\(b_n\) 等于多少？\end{exercise}
+\begin{exercise}[2] 求 \(f(x)=|x|\)（\(-\pi<x<\pi\)）的傅里叶级数。\end{exercise}
+\begin{exercise}[2] 求 \(f(x)=x^2\) 的傅里叶级数，并用它求 \(\sum 1/n^2\)。\end{exercise}
+\begin{exercise}[2] 求方波 \(f(x)=\begin{cases}1,&0<x<\pi\\-1,&-\pi<x<0\end{cases}\) 的傅里叶级数。\end{exercise}
+\begin{exercise}[2] 傅里叶级数在间断点处收敛到什么值？\end{exercise}
+\begin{exercise}[3] 求 \(f(x)=\begin{cases}x,&0\le x\le\pi\\0,&-\pi\le x<0\end{cases}\) 的傅里叶级数。\end{exercise}
+\begin{exercise}[3] 用 \(f(x)=x^2\) 的傅里叶级数求 \(\sum_{n=1}^\infty \frac{(-1)^{n-1}}{n^2}\)。\end{exercise}
+\begin{exercise}[3] 证明 \(\sum_{n=1}^\infty \frac{1}{(2n-1)^2} = \frac{\pi^2}{8}\)。\end{exercise}
+\begin{exercise}[3] 将 \(f(x)=\pi-x\) 在 \((0,\pi)\) 上展开为余弦级数。\end{exercise}
+\begin{exercise}[3] 将 \(f(x)=x\) 在 \((0,\pi)\) 上展开为正弦级数。\end{exercise}
+\begin{exercise}[4] 求 \(f(x)=e^x\)（\(-\pi<x<\pi\)）的傅里叶级数。\end{exercise}
+\begin{exercise}[4] 证明 \(\sum_{n=1}^\infty \frac{1}{n^4} = \frac{\pi^4}{90}\)（用 \(x^4\) 的展开）。\end{exercise}
+\begin{exercise}[4] 求 \(f(x)=\cos ax\)（\(a\) 非整数）的傅里叶级数。\end{exercise}
+\begin{exercise}[4] 证明 Parseval 等式：\(\frac1\pi\int_{-\pi}^\pi f^2 = \frac{a_0^2}{2}+\sum(a_n^2+b_n^2)\)。\end{exercise}
+\begin{exercise}[4] 用 Parseval 等式求 \(\sum 1/n^4\)。\end{exercise}
+\begin{exercise}[5] 证明傅里叶级数的逐项可积性。\end{exercise}
+\begin{exercise}[5] 证明傅里叶级数的最小平方性质。\end{exercise}
+\begin{exercise}[5] 求锯齿波 \(f(x)=x\)（周期 \(2\pi\)）的傅里叶级数并画出部分和图形。\end{exercise}
+\begin{exercise}[5] 证明 \(\sum_{n=1}^\infty \frac{\sin nx}{n} = \frac{\pi-x}{2}\)（\(0<x<2\pi\)）。\end{exercise}
+\begin{exercise}[6] 证明吉布斯现象。\end{exercise}
+\begin{exercise}[6] 证明傅里叶系数的衰减速度与函数光滑性的关系。\end{exercise}
+\begin{exercise}[6] 求半波整流 \(\max(\sin x,0)\) 的傅里叶级数。\end{exercise}
+\begin{exercise}[7] 证明 Fej\'er 定理：连续周期函数的傅里叶级数的算术平均一致收敛。\end{exercise}

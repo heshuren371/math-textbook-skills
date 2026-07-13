@@ -1,0 +1,46 @@
+% ch28: 函数项级数与幂级数
+\chapter{函数项级数与幂级数}
+\begin{applicationbox}
+学完本章：理解收敛域、幂级数展开
+\end{applicationbox}
+\section{函数项级数} \(\sum u_n(x)\)，收敛域使级数收敛的 \(x\) 的集合。
+\section{幂级数} \(\sum a_n(x-x_0)^n\)，收敛半径 \(R\)：\(|x-x_0|<R\) 收敛，\(|x-x_0|>R\) 发散。
+\(R = \lim \left|\frac{a_n}{a_{n+1}}\right| = \frac{1}{\limsup\sqrt[n]{|a_n|}}\)。
+
+\textbf{柯西-阿达马公式的 ε-N 证明：} 设 \(\frac1R=\limsup\sqrt[n]{|a_n|}\)。
+若 \(|x-x_0|<R\)，取 \(r\) 使 \(|x-x_0|<r<R\)，则存在 \(N\)，使 \(n\ge N\) 时
+\(\sqrt[n]{|a_n|}\le\frac1r\)，即 \(|a_n|\le\frac1{r^n}\)。
+于是 \(|a_n(x-x_0)^n|\le\left(\frac{|x-x_0|}{r}\right)^n\)，
+后者是公比 \(|x-x_0|/r<1\) 的几何级数，由比较判别法知原级数绝对收敛。\(\blacksquare\)
+\section{函数的幂级数展开} \(\frac1{1-x}=\sum x^n\)，\(e^x=\sum\frac{x^n}{n!}\)，\(\sin x=\sum(-1)^n\frac{x^{2n+1}}{(2n+1)!}\)
+\section{习题}
+\begin{exercise}[0] 幂级数的收敛半径怎么求？\end{exercise}
+\begin{exercise}[0] \(\sum x^n\) 的收敛半径是多少？\end{exercise}
+\begin{exercise}[0] 收敛区间和收敛域的区别是什么？\end{exercise}
+\begin{exercise}[0] \(e^x\) 的幂级数展开是什么？\end{exercise}
+\begin{exercise}[1] 求 \(\sum x^n\) 的收敛域。\end{exercise}
+\begin{exercise}[1] 求 \(\sum \frac{x^n}{2^n}\) 的收敛半径。\end{exercise}
+\begin{exercise}[1] 求 \(\sum \frac{x^n}{n}\) 的收敛域。\end{exercise}
+\begin{exercise}[1] 展开 \(\frac1{1-x}\) 为幂级数。\end{exercise}
+\begin{exercise}[2] 求 \(\sum \frac{x^n}{n!}\) 的收敛半径。\end{exercise}
+\begin{exercise}[2] 求 \(\sum n! x^n\) 的收敛半径。\end{exercise}
+\begin{exercise}[2] 求 \(\sum \frac{x^n}{n^2}\) 的收敛域。\end{exercise}
+\begin{exercise}[2] 展开 \(\ln(1+x)\) 为幂级数。\end{exercise}
+\begin{exercise}[3] 求 \(\sum \frac{(-1)^n x^{2n}}{(2n)!}\) 的收敛半径和和函数。\end{exercise}
+\begin{exercise}[3] 展开 \(\frac1{1+x^2}\) 为幂级数。\end{exercise}
+\begin{exercise}[3] 求 \(\sum \frac{n x^n}{2^n}\) 的和函数。\end{exercise}
+\begin{exercise}[3] 展开 \(\arctan x\) 为幂级数。\end{exercise}
+\begin{exercise}[3] 求 \(\sum \frac{x^{2n}}{n!}\) 的和函数。\end{exercise}
+\begin{exercise}[4] 求幂级数 \(\sum_{n=1}^\infty \frac{x^n}{n}\) 的和函数。\end{exercise}
+\begin{exercise}[4] 展开 \(\frac{x}{(1-x)^2}\) 为幂级数。\end{exercise}
+\begin{exercise}[4] 求 \(\sum \frac{x^{2n+1}}{2n+1}\) 的和函数。\end{exercise}
+\begin{exercise}[4] 展开 \(e^{-x^2}\) 为幂级数。\end{exercise}
+\begin{exercise}[4] 用幂级数近似 \(\int_0^{0.5} e^{-x^2}dx\)。\end{exercise}
+\begin{exercise}[5] 求 \(\sum \frac{n^2 x^n}{3^n}\) 的和函数。\end{exercise}
+\begin{exercise}[5] 证明 \(\sum \frac{(-1)^n x^{2n+1}}{(2n+1)n!}\) 是 \(\int_0^x e^{-t^2}dt\) 的展开。\end{exercise}
+\begin{exercise}[5] 求 \(\sum_{n=0}^\infty \frac{x^{2n}}{(2n)!}\) 的和函数。\end{exercise}
+\begin{exercise}[5] 展开 \(\sin^2 x\) 为幂级数。\end{exercise}
+\begin{exercise}[6] 证明阿贝尔定理：幂级数在收敛区间端点处的收敛性。\end{exercise}
+\begin{exercise}[6] 求 \(\sum_{n=1}^\infty \frac{(-1)^n x^{2n}}{n}\) 的和函数。\end{exercise}
+\begin{exercise}[6] 用幂级数求 \(\int_0^1 \frac{\sin x}{x}dx\) 的近似值。\end{exercise}
+\begin{exercise}[7] 证明 \(\sum_{n=1}^\infty \frac{x^n}{n^2}\) 在 \([-1,1]\) 一致收敛。\end{exercise}

@@ -1,0 +1,71 @@
+% ch18: 求导法则
+\chapter{求导法则——四则运算与链式法则}
+\begin{applicationbox}
+学完本章：掌握四则运算法则、链式法则、隐函数求导
+\end{applicationbox}
+
+\section{四则运算法则}
+\[(f\pm g)'=f'\pm g',\quad (fg)'=f'g+fg',\quad \left(\frac{f}{g}\right)'=\frac{f'g-fg'}{g^2}\]
+
+\textbf{乘法法则的 ε-δ 证明：}
+\[
+(fg)'(a)=\lim_{h\to0}\frac{f(a+h)g(a+h)-f(a)g(a)}{h}
+\]
+\[
+=\lim_{h\to0}\frac{[f(a+h)-f(a)]g(a+h)+f(a)[g(a+h)-g(a)]}{h}
+\]
+\[
+=\lim_{h\to0}\frac{f(a+h)-f(a)}{h}\cdot g(a+h) + f(a)\cdot\frac{g(a+h)-g(a)}{h}
+\]
+由 \(g\) 连续（可导⇒连续）知 \(\lim g(a+h)=g(a)\)，故 \((fg)'(a)=f'(a)g(a)+f(a)g'(a)\)。\(\blacksquare\)
+
+\section{链式法则}
+\[(f(g(x)))' = f'(g(x))\cdot g'(x)\]
+
+\textbf{ε-δ 证明：} 设 \(u=g(x)\)，\(y=f(u)\)。
+\[
+\frac{dy}{dx}=\lim_{h\to0}\frac{f(g(x+h))-f(g(x))}{h}
+=\lim_{h\to0}\frac{f(g(x+h))-f(g(x))}{g(x+h)-g(x)}\cdot\frac{g(x+h)-g(x)}{h}
+\]
+令 \(k=g(x+h)-g(x)\)，当 \(h\to0\) 时 \(k\to0\)（由 \(g\) 连续），故
+\[
+\frac{dy}{dx}=\lim_{k\to0}\frac{f(u+k)-f(u)}{k}\cdot\lim_{h\to0}\frac{g(x+h)-g(x)}{h}=f'(u)g'(x)
+\]
+其中第一个极限存在是因为 \(f\) 可导，第二个因为 \(g\) 可导。\(\blacksquare\)
+
+\section{隐函数求导}
+\begin{examplebox}[3]
+\(x^2+y^2=1\)，两边对 \(x\) 求导：\(2x+2yy'=0\)，\(y'=-\frac{x}{y}\)
+\end{examplebox}
+
+\section{习题}
+\begin{exercise}[0] \((x^2)'=?\) \end{exercise}
+\begin{exercise}[0] \((\sin x)'=?\) \end{exercise}
+\begin{exercise}[0] 链式法则的公式是什么？\end{exercise}
+\begin{exercise}[0] \((e^x)'=?\) \end{exercise}
+\begin{exercise}[1] 求 \(f(x)=3x^2+2x-1\) 的导数。\end{exercise}
+\begin{exercise}[1] 求 \(f(x)=x\sin x\) 的导数。\end{exercise}
+\begin{exercise}[1] 求 \(f(x)=\frac{x}{x+1}\) 的导数。\end{exercise}
+\begin{exercise}[1] 求 \(f(x)=\sin(2x)\) 的导数。\end{exercise}
+\begin{exercise}[2] 求 \(f(x)=x^2\cos x\) 的导数。\end{exercise}
+\begin{exercise}[2] 求 \(f(x)=\ln(x^2+1)\) 的导数。\end{exercise}
+\begin{exercise}[2] 求 \(f(x)=e^{3x}\) 的导数。\end{exercise}
+\begin{exercise}[2] 曲线 \(x^2+xy+y^2=3\) 在点 \((1,1)\) 处的切线斜率。\end{exercise}
+\begin{exercise}[3] 求 \(f(x)=\tan x\) 的导数。\end{exercise}
+\begin{exercise}[3] 求 \(f(x)=\sin^2 x + \cos^2 x\) 的导数（先化简再求）。\end{exercise}
+\begin{exercise}[3] 求 \(y=\ln(\sin x)\) 的导数。\end{exercise}
+\begin{exercise}[3] 求 \(f(x)=\frac{e^x}{x}\) 的导数。\end{exercise}
+\begin{exercise}[3] \(xy=e^{x+y}\) 求 \(y'\)。\end{exercise}
+\begin{exercise}[4] 求 \(f(x)=\sqrt{1+x^2}\) 的导数。\end{exercise}
+\begin{exercise}[4] 求 \(f(x)=\sin(e^x)\) 的导数。\end{exercise}
+\begin{exercise}[4] 求 \(y=\arctan x\) 的导数。\end{exercise}
+\begin{exercise}[4] 求 \(f(x)=x^x\) 的导数（提示：取对数）。\end{exercise}
+\begin{exercise}[4] \(y^2 = x^2 + xy\) 求 \(y'\)。\end{exercise}
+\begin{exercise}[5] 求 \(f(x)=e^{\sin x}\cos x\) 的导数。\end{exercise}
+\begin{exercise}[5] 求 \(y=\arcsin x\) 的导数。\end{exercise}
+\begin{exercise}[5] 求 \(f(x)=\ln(x+\sqrt{1+x^2})\) 的导数。\end{exercise}
+\begin{exercise}[5] 求 \(y=x^{\sin x}\) 的导数。\end{exercise}
+\begin{exercise}[6] 证明 \((\sec x)'=\sec x\tan x\)。\end{exercise}
+\begin{exercise}[6] 求 \(f(x)=\sin(\cos(\tan x))\) 的导数。\end{exercise}
+\begin{exercise}[6] 求曲线 \(x^3+y^3=3xy\) 在 \((\frac32,\frac32)\) 处的切线。\end{exercise}
+\begin{exercise}[7] 用链式法则证明若 \(f\) 是奇函数且可导，则 \(f'\) 是偶函数。\end{exercise}

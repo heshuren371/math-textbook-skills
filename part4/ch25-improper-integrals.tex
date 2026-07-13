@@ -1,0 +1,51 @@
+% ch25: 广义积分
+\chapter{广义积分——无穷限与无界函数}
+\begin{applicationbox}
+学完本章：处理无穷限和无界函数的积分
+\end{applicationbox}
+
+\section{无穷限广义积分} \(\int_a^\infty f(x)dx = \lim_{b\to\infty}\int_a^b f(x)dx\)
+收敛当极限存在，否则发散。
+
+\textbf{比较判别法的 ε-N 证明：} 设 \(0\le f(x)\le g(x)\)，\(\int_a^\infty g(x)dx\) 收敛。
+记 \(F(b)=\int_a^b f(x)dx\)，\(G(b)=\int_a^b g(x)dx\)。由 ε-N 定义，
+对任意 \(\varepsilon>0\)，存在 \(M>a\)，使 \(b>c>M\) 时
+\(G(b)-G(c)=\int_c^b g(x)dx<\varepsilon\)。
+由于 \(f\le g\)，有 \(F(b)-F(c)=\int_c^b f(x)dx\le\int_c^b g(x)dx<\varepsilon\)，
+故 \(\lim_{b\to\infty}F(b)\) 存在（柯西准则），广义积分收敛。\(\blacksquare\)
+
+\section{无界函数的广义积分} \(f\) 在 \(b\) 处无界：\(\int_a^b f(x)dx = \lim_{\varepsilon\to0^+}\int_a^{b-\varepsilon} f(x)dx\)
+
+\begin{examplebox}[1] \(\int_1^\infty \frac{dx}{x^2} = \left[-\frac1x\right]_1^\infty = 1\) 收敛；\(\int_1^\infty \frac{dx}{x} = \infty\) 发散。\end{examplebox}
+
+\section{习题}
+\begin{exercise}[0] \(\int_1^\infty \frac{dx}{x^2}\) 收敛吗？\end{exercise}
+\begin{exercise}[0] \(\int_0^1 \frac{dx}{x}\) 收敛吗？\end{exercise}
+\begin{exercise}[0] 广义积分的极限形式是什么？\end{exercise}
+\begin{exercise}[0] 判断 \(\int_{-\infty}^\infty \frac{dx}{1+x^2}\) 是否收敛。\end{exercise}
+\begin{exercise}[1] \(\int_1^\infty \frac{dx}{x^3}\)\end{exercise}
+\begin{exercise}[1] \(\int_0^1 \frac{dx}{\sqrt{x}}\)\end{exercise}
+\begin{exercise}[1] \(\int_0^\infty e^{-x} dx\)\end{exercise}
+\begin{exercise}[1] \(\int_{-\infty}^0 e^x dx\)\end{exercise}
+\begin{exercise}[2] \(\int_0^\infty xe^{-x^2} dx\)\end{exercise}
+\begin{exercise}[2] \(\int_1^\infty \frac{\ln x}{x^2} dx\)\end{exercise}
+\begin{exercise}[2] \(\int_0^1 \ln x dx\)\end{exercise}
+\begin{exercise}[2] \(\int_0^1 \frac{dx}{\sqrt{1-x}}\)\end{exercise}
+\begin{exercise}[3] 判断 \(\int_1^\infty \frac{dx}{x^p}\) 的收敛性。\end{exercise}
+\begin{exercise}[3] 判断 \(\int_0^1 \frac{dx}{x^p}\) 的收敛性。\end{exercise}
+\begin{exercise}[3] \(\int_0^\infty \frac{dx}{(1+x^2)^2}\)\end{exercise}
+\begin{exercise}[3] \(\int_0^1 \frac{\ln x}{\sqrt{x}} dx\)\end{exercise}
+\begin{exercise}[3] \(\int_2^\infty \frac{dx}{x\ln x}\)\end{exercise}
+\begin{exercise}[4] 比较判别法判断 \(\int_1^\infty \frac{1}{1+x^4} dx\)。\end{exercise}
+\begin{exercise}[4] \(\int_0^1 \frac{dx}{\sqrt{x(1-x)}}\)\end{exercise}
+\begin{exercise}[4] \(\int_0^\infty \frac{\sin x}{x} dx\)（收敛但不绝对收敛）。\end{exercise}
+\begin{exercise}[4] \(\int_0^\infty e^{-x}\sin x dx\)\end{exercise}
+\begin{exercise}[4] \(\int_{-\infty}^\infty \frac{dx}{x^2+2x+2}\)\end{exercise}
+\begin{exercise}[5] \(\Gamma\) 函数：\(\Gamma(s)=\int_0^\infty x^{s-1}e^{-x}dx\)，证明 \(\Gamma(n+1)=n!\)。\end{exercise}
+\begin{exercise}[5] 证明 \(\int_0^\infty x^n e^{-x}dx = n!\)。\end{exercise}
+\begin{exercise}[5] \(\int_0^\infty \frac{x}{e^x-1} dx\)（提示：展开为级数）。\end{exercise}
+\begin{exercise}[5] \(\int_0^{\pi/2} \ln\sin x dx\)。\end{exercise}
+\begin{exercise}[6] 证明 \(\int_0^\infty e^{-x^2}dx = \frac{\sqrt{\pi}}{2}\)。\end{exercise}
+\begin{exercise}[6] 证明 \(\int_0^\infty \frac{\sin x}{x}dx = \frac{\pi}{2}\)。\end{exercise}
+\begin{exercise}[6] 比较 \(\int_1^\infty \frac{dx}{x^p\ln^q x}\) 的收敛性。\end{exercise}
+\begin{exercise}[7] 证明 \(\int_0^\infty \frac{dx}{1+x^4} = \frac{\pi}{2\sqrt{2}}\)。\end{exercise}
