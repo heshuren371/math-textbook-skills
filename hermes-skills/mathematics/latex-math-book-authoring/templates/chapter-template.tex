@@ -1,0 +1,114 @@
+%% 章节模板 — 复制此文件开始新一章
+%%
+%% 注意事项：
+%%   1. 不要在 tcolorbox 环境内放 figure 环境（陷阱 #10）
+%%   2. 符号卡片用 3 列格式，第二列用 \verb 展示 LaTeX 源码（陷阱 #12）
+%%   3. 练习的 \begin{exercise} 和 \end{exercise} 必须成对（陷阱 #13）
+%%   4. 附录答案中 display math 多行用 gathered 环境（陷阱 #11）
+
+\chapter{标题——副标题}
+
+%% ============================
+%% 应用引导
+%% ============================
+\begin{applicationbox}
+
+\textbf{学完本章你能做什么？}
+
+\begin{enumerate}
+  \item 之前我做不到什么？之后我能做到什么？
+  \item 一个具体的日常例子。
+\end{enumerate}
+
+\end{applicationbox}
+
+
+%% ============================
+\section{核心概念}
+%% ============================
+
+\subsection{从直觉开始}
+
+[生活化的故事或场景]
+
+% 符号卡片（新符号首次出现时使用）
+\begin{symbolcard}
+$\lim_{n\to\infty} a_n$ & \verb|\lim_{n\to\infty} a_n| & 含义说明 \\
+$f(x)$ & \verb|f(x)| & 含义说明 \\
+\end{symbolcard}
+
+\subsection{定义}
+
+\begin{definitionbox}[标题]
+正式定义内容。
+\[
+公式
+\]
+\end{definitionbox}
+
+\begin{notebox}
+易错点、注意事项。
+\end{notebox}
+
+
+%% ============================
+\section{例题}
+%% ============================
+
+\begin{examplebox}[编号]
+题目内容。
+
+\textbf{解}：
+\[
+推导过程
+\]
+\end{examplebox}
+
+
+%% ============================
+\section{数值验证}
+%% ============================
+
+\begin{lstlisting}[language=Python, caption=验证标题]
+import numpy as np
+
+# 验证
+x = np.linspace(0, 1, 100)
+assert np.allclose(...)
+print("验证通过 [OK]")
+\end{lstlisting}
+
+
+%% ============================
+\section{练习}
+%% ============================
+
+\begin{exercise}[易]
+题目内容。
+\end{exercise}
+
+\begin{exercise}[中]
+题目内容。
+\end{exercise}
+
+\begin{exercise}[难]
+题目内容。
+\end{exercise}
+
+
+%% ============================
+\section{本章小结}
+%% ============================
+
+\begin{itemize}
+  \item 要点1
+  \item 要点2
+\end{itemize}
+
+\begin{progressbox}
+\textbf{之前你只能……}\\[6pt]
+\textbf{现在你能……}\\[6pt]
+\textbf{从……到……}
+\end{progressbox}
+
+\textbf{下一章预告：} 过渡句。

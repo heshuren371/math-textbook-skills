@@ -126,6 +126,45 @@ math-analysis/
 ├── part0/ ~ part5/                 # 6编 × 30 个 .tex 文件
 ├── figures/                        # 57 张矢量图 + 16 个生成脚本
 └── appendix/                       # 习题答案（编写中）
+└── hermes-skills/                   # 现代数学家的 Hermes Skills
+    └── mathematics/
+        ├── latex-math-book-authoring/   # 📘 LaTeX 数学教材编写
+        ├── latex-figure-drawing/        # 📊 LaTeX 矢量图绘制
+        ├── math-output-format/          # 📐 数学解答输出格式
+        ├── math-verification-pipeline/  # 🔬 数学验证管线
+        ├── math-review/                 # 🔍 数学审查
+        └── epsilon-n-delta-audit/       # ε-δ 审计清单
+```
+
+## Hermes Skills（给 AI Agent 的数学能力）
+
+此仓库包含**现代数学家 📐** 的完整 Hermes Skills 集，可直接供 Hermes Agent / Claude Code / Codex CLI 使用。
+
+| Skill | 行数 | 说明 |
+|-------|------|------|
+| **`latex-math-book-authoring`** | 828 行 | 🔥 教材全流程：读者画像→认知依赖图→元认知设计→大纲→撰写→矢量图→验证→编译 |
+| **`latex-figure-drawing`** | 572 行 | Python + matplotlib 生成精确数学矢量图，替代手写 TikZ |
+| **`math-output-format`** | 708 行 | 数学解答输出规范、SymPy/Z3 验证、TinyTeX 编译 |
+| **`math-verification-pipeline`** | 450+ 行 | 数学验证管线：WolframScript、蒙特卡洛、对抗博弈分析 |
+| **`math-review`** | 800+ 行 | 数学审查：高考压轴题、几何证明、参数不等式深度分析 |
+| **`epsilon-n-delta-audit`** | 120+ 行 | ε-N/ε-δ 严格证明审计清单 |
+
+### 安装到 Hermes Agent
+
+```bash
+# 克隆仓库
+git clone https://github.com/heshuren371/math-textbook-skills.git
+
+# 复制到你的 Hermes Agent 技能目录
+cp -r math-textbook-skills/hermes-skills/* ~/.hermes/profiles/your-profile/skills/
+```
+
+### 单独使用 Skill
+
+每个 SKILL.md 可单独作为 Claude Code / Codex CLI 的 instructions 文件加载。
+
+```bash
+claude-code --context hermes-skills/mathematics/latex-math-book-authoring/SKILL.md
 ```
 
 ## 许可证
