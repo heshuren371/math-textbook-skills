@@ -16,6 +16,76 @@
 
 
 % ============================================================
+\section*{知识补充：集合、数集与区间——函数的"原料"}
+
+\textbf{本模块是学习函数的前置知识。} 如果你已经学过集合和区间，可以跳过；如果没学过，请认真读完——函数的所有讨论都建立在集合和区间之上。
+
+\begin{definitionbox}[集合]
+\textbf{集合}（set，读作 jí hé）就是把一些确定的、互不相同的对象放在一起，看作一个整体。其中的每个对象称为集合的\textbf{元素}（element）。
+
+例如：
+\begin{itemize}
+  \item $\{1, 2, 3\}$ 是包含 1、2、3 这三个数的集合。
+  \item $\{\text{苹果}, \text{香蕉}, \text{橘子}\}$ 是三种水果的集合。
+  \item $\mathbb{N} = \{1, 2, 3, 4, \ldots\}$ 是\textbf{自然数集}（所有正整数）。
+\end{itemize}
+
+如果 $a$ 是集合 $A$ 的元素，记作 $a \in A$（读作"a 属于 A"）；如果不是，记作 $a \notin A$。例如 $2 \in \{1,2,3\}$，但 $5 \notin \{1,2,3\}$。
+\end{definitionbox}
+
+\begin{definitionbox}[常见数集]
+数学中有几个\textbf{非常重要}的数集，用特殊的黑板粗体字母表示：
+\[
+\begin{array}{c|l}
+\mathbb{N} & \textbf{自然数集}：\{1,2,3,4,\ldots\} \\
+\mathbb{Z} & \textbf{整数集}：\{\ldots,-3,-2,-1,0,1,2,3,\ldots\} \\
+\mathbb{Q} & \textbf{有理数集}：可以写成分数 \frac{p}{q}（p,q 是整数，q\neq0）的数 \\
+\mathbb{R} & \textbf{实数集}：全体有理数和无理数（如 \sqrt{2},\pi）
+\end{array}
+\]
+其中 $\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$（每个都是后一个的子集）。
+\end{definitionbox}
+
+\begin{definitionbox}[区间]
+\textbf{区间}（interval）是实数集上一段连续的数的集合。它有四种基本类型：
+
+\begin{center}
+\begin{tabular}{c|c|c}
+\textbf{类型} & \textbf{记号} & \textbf{含义} \\ \hline
+闭区间 & $[a,b]$ & $\{x \in \mathbb{R} : a \le x \le b\}$ \\
+开区间 & $(a,b)$ & $\{x \in \mathbb{R} : a < x < b\}$ \\
+半开半闭 & $[a,b)$ & $\{x \in \mathbb{R} : a \le x < b\}$ \\
+半开半闭 & $(a,b]$ & $\{x \in \mathbb{R} : a < x \le b\}$
+\end{tabular}
+\end{center}
+
+\textbf{记忆方法：}方括号 $[$ $]$ 包含端点（闭），圆括号 $($ $)$ 不包含端点（开）。
+\end{definitionbox}
+
+\begin{definitionbox}[集合的运算——并集与交集]
+两个集合可以组合成新集合：
+\begin{itemize}
+  \item \textbf{并集} $A \cup B$（读作"A 并 B"）：属于 $A$ \textbf{或}属于 $B$ 的所有元素。
+  \item \textbf{交集} $A \cap B$（读作"A 交 B"）：\textbf{同时}属于 $A$ \textbf{且}属于 $B$ 的所有元素。
+\end{itemize}
+\[
+\begin{aligned}
+A \cup B &= \{x : x \in A \text{ 或 } x \in B\} \\
+A \cap B &= \{x : x \in A \text{ 且 } x \in B\}
+\end{aligned}
+\]
+
+\textbf{例子：}设 $A = \{1,2,3\}$，$B = \{2,3,4\}$，则 $A \cup B = \{1,2,3,4\}$（所有出现过的数），$A \cap B = \{2,3\}$（两个集合都有的数）。
+\end{definitionbox}
+
+\begin{notebox}[为什么要学集合和区间？]
+函数 $f$ 的定义是：从一个集合（\textbf{定义域}）到另一个集合（\textbf{值域}）的对应法则。如果你不知道什么是集合，就无法准确描述"函数从哪来到哪去"。区间则是定义域最常见的形态——$f(x) = \sqrt{x}$ 的定义域就是区间 $[0,\infty)$。
+
+所以：\textbf{集合是函数的容器，区间是函数的活动范围。}
+\end{notebox}
+
+
+% ============================================================
 \section{从方程到函数——为什么需要函数？}
 % ============================================================
 
