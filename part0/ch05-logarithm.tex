@@ -153,10 +153,6 @@ a^b = c \quad\Longleftrightarrow\quad \log_a c = b
 \end{examplebox}
 
 % ── 信心校准（渐退序列中段）──
-\begin{confidencebox}
-从例1（完全展开）到例4（只给开头），你感觉到难度递增了吗？
-如果例4卡住了，说明对数运算法则还不够熟——回看本节定理框，把"乘变加、除变减、指数变系数"默写一遍。
-\end{confidencebox}
 
 
 \begin{examplebox}[5——换底公式]
@@ -574,7 +570,7 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 (1)\; \lg 6 \qquad (2)\; \lg 12 \qquad (3)\; \lg 1.5
 \]
 \end{exercise}
-\begin{hintref}本题 L2：用哪个定理——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[3]
 解方程：
@@ -584,7 +580,7 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 （注意验根！）
 
 \end{exercise}
-\begin{hintref}本题 L2：用哪个定理——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[3]
 地震的里氏震级 \(M\) 和能量 \(E\)（焦耳）的关系为 \(\lg E = 4.8 + 1.5M\)。
@@ -594,7 +590,7 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 \end{enumerate}
 
 \end{exercise}
-\begin{hintref}本题 L2：用哪个定理——参见本章提示附录。\end{hintref}
+
 \qquad \textcolor{gray}{[回顾第1章：函数建模]}%
 
 \begin{exercise}[3]
@@ -605,7 +601,7 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 （提示：用换底公式写成 \(\frac{\lg 3}{\lg 2} \times \frac{\lg 4}{\lg 3} \times \cdots\)）
 
 \end{exercise}
-\begin{hintref}本题 L2：用哪个定理——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[3]
 证明 \(\log_a b = \dfrac{1}{\log_b a}\)（\(a,b > 0, a\neq1, b\neq1\)）。
@@ -613,7 +609,7 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 % ===== 中等 =====
 
 \end{exercise}
-\begin{hintref}本题 L2：用哪个定理——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[4]
 解方程：
@@ -624,7 +620,7 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 （提示：(2) 令 \(t = \lg x\)）
 
 \end{exercise}
-\begin{hintref}本题 L3+L4：第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[4]
 已知函数 \(f(x) = \ln(x + \sqrt{1 + x^2})\)。
@@ -634,20 +630,20 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 \end{enumerate}
 
 \end{exercise}
-\begin{hintref}本题 L3+L4：第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[4]
 已知 \(\log_2 3 = a\)，\(\log_3 5 = b\)，用 \(a, b\) 表示 \(\log_2 15\)。
 
 \end{exercise}
-\begin{hintref}本题 L3+L4：第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[4]
 函数 \(y = \log_2(x-1) + 2\) 是由 \(y = \log_2 x\) 经过怎样的平移得到的？
 它的定义域和值域分别是什么？
 
 \end{exercise}
-\begin{hintref}本题 L3+L4：第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[4]
 解不等式：
@@ -658,14 +654,14 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 % ===== 进阶 =====
 
 \end{exercise}
-\begin{hintref}本题 L3+L4：第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[5]
 解方程 \(\log_2(4^x + 4) = x + \log_2(2^{x+1} - 3)\)。
 （提示：利用对数运算法则拆开，再换元）
 
 \end{exercise}
-\begin{hintref}本题 L3+L4：第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[5]
 已知函数 \(f(x) = \ln \dfrac{1-x}{1+x}\)（\(-1 < x < 1\)）。
@@ -675,7 +671,7 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 \end{enumerate}
 
 \end{exercise}
-\begin{hintref}本题 L3+L4：第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[5]
 某声音的强度是 \(I\) 瓦/平方米，其分贝值为 \(d = 10 \lg \dfrac{I}{I_0}\)，
@@ -687,7 +683,7 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 \end{enumerate}
 
 \end{exercise}
-\begin{hintref}本题 L3+L4：第一步+完整思路——参见本章提示附录。\end{hintref}
+
 \qquad \textcolor{gray}{[回顾第4章：对数与指数的互逆]}%
 
 \begin{exercise}[5]
@@ -696,7 +692,7 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 % ===== 拔高 =====
 
 \end{exercise}
-\begin{hintref}本题 L3+L4：第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[6]
 已知函数 \(f(x) = \log_2 (x^2 - 2ax + 3)\)。
@@ -706,14 +702,14 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 \end{enumerate}
 
 \end{exercise}
-\begin{hintref}本题 L2+L3+L4：知识点梳理+第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[6]
 解方程 \(\log_2 (x+1) = \log_4 (x+5)\)。
 （提示：把两边的底数统一，用换底公式）
 
 \end{exercise}
-\begin{hintref}本题 L2+L3+L4：知识点梳理+第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[6]
 已知 \(\log_{12} 27 = a\)，用 \(a\) 表示 \(\log_6 16\)。
@@ -722,7 +718,7 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 % ===== 极难 =====
 
 \end{exercise}
-\begin{hintref}本题 L2+L3+L4：知识点梳理+第一步+完整思路——参见本章提示附录。\end{hintref}
+
 
 \begin{exercise}[7]
 已知函数 \(f(x) = \lg \dfrac{1 - x}{1 + x}\)。
@@ -738,19 +734,8 @@ print(f"  完美预测的损失: {cross_entropy(y_true, np.array([1, 0, 0])):.4f
 \end{exercise}
 
 % ── 先想后看门禁 ──
-\begin{retrievalgatebox}
-翻答案之前，先做三件事：
-\begin{enumerate}
-  \item 用一句话说出本章核心概念。
-  \item 有做错的题？找一道同类型、同难度的新题（从本章习题中选一道没做过的），独立做一遍。
-  \item 选一道做对的题，讲给想象中的初学者听。
-\end{enumerate}
-\end{retrievalgatebox}
+
 
 % ── 信心校准（习题区末尾）──
-\begin{confidencebox}
-做完本章后，你能用自己的话解释「对数是指数的逆运算」吗？
-如果能，你确实学会了。如果不行，重读例1、例2和例8。
-\end{confidencebox}
 
-\begin{hintref}本题 L2+L3+L4：知识点梳理+第一步+完整思路——参见本章提示附录。\end{hintref}
+
