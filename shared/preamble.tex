@@ -16,6 +16,9 @@
 \usepackage{enumitem}
 \usepackage{fontspec}
 
+% ── 好题标记与汇总系统 ──
+\usepackage[book]{goodproblems}
+
 % ── 中文字体 ──
 \setmainfont{Times New Roman}
 \setCJKmainfont{PingFang SC}
@@ -153,6 +156,19 @@
   \noindent\textbf{#1}\quad
   \ignorespaces
 }{\par\vspace{4pt}}
+
+% ── 好题标记适配（兼容现有习题系统）──
+% \GoodExercise{label} 放在 exercise 环境内，标记为好题
+% \GoodAnswer{label} 放在 answer 环境内，标记解析位置
+\makeatletter
+\newcommand{\GoodExercise}[1]{%
+  \label{prob:#1}%
+  \GP@write{\string\GPentry{\theexercise}{#1}}%
+}
+\newcommand{\GoodAnswer}[1]{%
+  \label{sol:#1}%
+}
+\makeatother
 
 % ============================================================
 % 其他设置

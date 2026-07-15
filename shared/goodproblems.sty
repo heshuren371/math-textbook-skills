@@ -1,0 +1,132 @@
+%%
+%% goodproblems.sty
+%% 好题标记与自动汇总系统
+%% 2026/07/15 v2.1 — 使用 .aux 两遍编译机制
+%%
+%% 用法：
+%%   \usepackage{goodproblems}        % 独立编译模式（默认）
+%%   \usepackage[book]{goodproblems}  % 合订本模式（开启好题汇总）
+%%
+%% 核心命令：
+%%   \begin{problem}[label] ... \end{problem}
+%%   \begin{solution}[label] ... \end{solution}
+%%   \GoodProblem{label}
+%%   \printGoodProblems
+%%
+%% 好题汇总需要编译两次——与目录同理。
+%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{goodproblems}[2026/07/15 v2.1 Good Problems aggregation system]
+
+%% ===== 依赖包 =====
+\RequirePackage{hyperref}
+\RequirePackage{etoolbox}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{xcolor}
+
+%% ===== 选项 =====
+\newif\ifGP@book
+\GP@bookfalse
+\DeclareOption{book}{\GP@booktrue}
+\ProcessOptions\relax
+
+%% ===== 计数器 =====
+\newcounter{GP@problem}
+\newcounter{GP@solution}
+
+%% ===== 好题数据存储 =====
+%% 使用 .aux 文件两遍编译机制：
+%%   第1遍：\GoodProblem 将数据写入 .aux（通过 \protected@write）
+%%   第2遍：.aux 被读取，\GP@store 将数据追加到 \GP@goodlist
+%%   \printGoodProblems 输出 \GP@goodlist
+%%
+%% 这样避免了同一遍中读写同一文件的问题。
+
+%% 初始化好题列表（为空）
+\newcommand*{\GP@goodlist}{}
+
+%% 从 .aux 读取时调用的存储命令
+%% \GP@store{入口内容}
+\newcommand{\GP@store}[1]{%
+  \g@addto@macro\GP@goodlist{#1}%
+}
+
+%% 写入 .aux 的命令（在文档中调用）
+%% 将 \GP@store{...} 写入主 .aux（用 \@mainaux 而非 \@auxout，
+%% 因为 \include 会重定向 \@auxout 到章节 .aux）
+\newcommand{\GP@write}[1]{%
+  \ifGP@book
+    \protected@write\@mainaux{}{\string\GP@store{#1}}%
+  \fi
+}
+
+%% ===== 练习环境 =====
+% 用法: \begin{problem}[my-label] ... \end{problem}
+% 自动编号 + 埋入 \label{prob:my-label}
+\newenvironment{problem}[1][]{%
+  \refstepcounter{GP@problem}%
+  \par\vspace{1em}\noindent
+  \textbf{\theGP@problem}%
+  \if\relax\detokenize{#1}\relax\else
+    \label{prob:#1}%
+  \fi
+  \quad
+  \begingroup
+    \small\itshape
+}{%
+  \endgroup
+  \par\vspace{0.5em}
+}
+
+%% ===== 解析环境 =====
+% 用法: \begin{solution}[my-label] ... \end{solution}
+% 埋入 \label{sol:my-label}
+\newenvironment{solution}[1][]{%
+  \refstepcounter{GP@solution}%
+  \par\vspace{0.5em}\noindent
+  {\color{blue!60!black}\textbf{解}}%
+  \if\relax\detokenize{#1}\relax\else
+    \label{sol:#1}%
+  \fi
+  \quad
+  \begingroup
+}{%
+  \endgroup
+  \par\vspace{1em}
+}
+
+%% ===== 好题标记命令 =====
+% 用法: \GoodProblem{label}
+% 将本题标记为好题，下一遍编译时出现在好题汇总中
+\newcommand{\GoodProblem}[1]{%
+  \GP@write{\string\GPentry{\theGP@problem}{#1}}%
+}
+
+%% ===== 好题汇总条目 =====
+% \GPentry{编号}{标签}
+\newcommand{\GPentry}[2]{%
+  \item \textbf{第#1题} \quad
+  \hyperref[prob:#2]{\color{blue}题目} $\leftrightarrow$
+  \hyperref[sol:#2]{\color{blue!60!black}解析}%
+}
+
+%% ===== 打印好题汇总 =====
+% 用法: \printGoodProblems
+% 输出好题汇总（需要编译两次生效）
+\newcommand{\printGoodProblems}{%
+  \ifGP@book
+    \chapter{好题汇总}
+    \ifx\GP@goodlist\empty
+      \noindent 暂无好题标记。\\
+      {\small\color{gray}提示：合订本需要编译两次才会生成好题汇总。}
+    \else
+      \begin{enumerate}
+        \GP@goodlist
+      \end{enumerate}
+    \fi
+  \fi
+}
+
+\endinput
