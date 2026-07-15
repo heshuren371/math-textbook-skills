@@ -1,6 +1,6 @@
 ---
 name: latex-math-book-authoring
-description: 高等数学/微积分教材全流程生成——从读者画像→认知依赖图→元认知设计→大纲→逐章撰写→矢量图→数值验证→编译交付
+description: "Use when authoring higher mathematics/calculus textbooks end-to-end — learner portrait, cognitive dependency map, metacognitive design, outline, chapter-by-chapter writing, vector figures, numerical verification, compilation, delivery. Unlike latex-figure-drawing (generates figures, not content) or math-output-format (defines format standards, not content), latex-math-book-authoring produces complete textbook content with pedagogical design. Do NOT use for generating figures (latex-figure-drawing) or format specifications (math-output-format)."
 emoji: 📘
 ---
 
@@ -323,6 +323,19 @@ project/
   fonttitle=\bfseries, title=注意 #1}
 \newtcolorbox{progressbox}{colback=yellow!10!white, colframe=yellow!60!orange,
   fonttitle=\bfseries\large, title=进步宣言}
+
+% ── 自学教学设计环境（详见 references/self-study-pedagogy.md）──
+% 注意：tcolorbox 标题中禁止使用方括号 []，否则会被解析为可选参数，
+% 导致 "options@for=xxx" 文本泄漏到 PDF 产生乱码。
+\newtcolorbox{hintref}{colback=gray!5!white, colframe=gray!40!black,
+  arc=2pt, left=4pt, right=4pt, top=3pt, bottom=3pt,
+  fonttitle=\small\bfseries, title=提示}
+\newtcolorbox{confidencebox}{colback=white, colframe=purple!40!black,
+  arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fonttitle=\small\bfseries, title=信心校准}
+\newtcolorbox{retrievalgatebox}{colback=white, colframe=orange!60!black,
+  arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fonttitle=\small\bfseries, title=先想后看}
 ```
 
 ### 9.4 符号卡片（4列版——含读法）
@@ -380,6 +393,25 @@ project/
   \subsection*{\textcolor{purple}{#1}\hfill\textcolor{gray}{#2}}}
 ```
 
+### 第1章必修：前置知识模块（2026-07-13 教训）
+
+**所有从零开始的教材，第1章必须先插入一个\"知识补充：集合、数集与区间\"模块，放在应用引导框之后、正式内容之前。**
+
+原因：函数的定义依赖于集合（定义域、值域），而读者可能完全没有集合的概念。
+如果不补这个模块，读者读到\"设 $f: A \\to B$ 是函数\"时完全不知道 $A$ 和 $B$ 是什么。
+
+模块必须覆盖：
+| 概念 | 写法 | 示例 |
+|:-----|:-----|:-----|
+| 集合与元素 | $\\{1,2,3\\}$, $a\\in A$, $a\\notin A$ | $2\\in\\{1,2,3\\}$ |
+| 常见数集 | $\\mathbb{N}, \\mathbb{Z}, \\mathbb{Q}, \\mathbb{R}$ | $\\mathbb{N}\\subset\\mathbb{Z}\\subset\\mathbb{Q}\\subset\\mathbb{R}$ |
+| 区间 | $[a,b]$, $(a,b)$, $[a,b)$, $(a,b]$ | $[0,1)$ 表示 $0\\le x<1$ |
+| 并集交集 | $A\\cup B$, $A\\cap B$ | $\\{1,2\\}\\cup\\{2,3\\}=\\{1,2,3\\}$ |
+
+并在结尾加一句总结：**集合是函数的容器，区间是函数的活动范围。**
+
+注意：这个 `\\section*{知识补充...}` 是不编号的（`*`版本），不影响章节编号体系。
+
 ### 9.6 每章模板
 
 章节模板遵循「从上一章来 → 核心内容 → 通往下一章」三段结构：
@@ -407,7 +439,28 @@ project/
 \subsection{定义}
 \begin{definitionbox}[概念] 定义 \end{definitionbox}
 \subsection{例题}
-\begin{examplebox}[1] 第一步完全展开不跳步 \end{examplebox}
+% 例1：完全展开 🔓 —— 每步写出 + WHY 注释
+\begin{examplebox}[1 🔓 完全展开] 第一步完全展开不跳步，每步后面跟「为什么这样做」\end{examplebox}
+
+% 例2：去最后1步 🔒₁ —— 学生完成最后一步
+\begin{examplebox}[2 🔒₁ 请完成最后一步] 给前部所有步骤，最后一步留空 \end{examplebox}
+
+% 例3：去最后2步 🔒₂
+\begin{examplebox}[3 🔒₂ 请完成最后两步] 留空约 20-30\% \end{examplebox}
+
+% 例4：只给开头 🔒₃ —— 只给第一步，其余学生完成
+\begin{examplebox}[4 🔒₃ 只给你第一步] 给出问题归类+公式选择，其余留空 \end{examplebox}
+
+% 例5+：完全独立（标准习题）
+
+% ── 信心校准（例题渐退序列中间插入）──
+\begin{confidencebox}
+做完上面这道题后，请标出你的信心等级：
+
+□ 我很确定做对了（≥90\%）  □ 大概对但不完全确定（60-89\%）  □ 不太确定（<60\%）
+
+翻到答案后检查：你的信心等级和实际正确率一致吗？
+\end{confidencebox}
 \subsection{符号卡片}
 \begin{symbolcard} 符号 & \verb|写法| & 读法 & 含义 \\ \end{symbolcard}
 \subsection{数值验证}
@@ -441,9 +494,33 @@ mathkit pipeline audit   # 或 mathkit chapter report
 报告会列出每章的 lim 数、ε 覆盖、例题数、习题数、图数、编译毒瘤数和通过状态。
 标准：5/5 强制五问全通过方可交付。
 
-% ── 段6：习题（9 级难度，30-40 道） ──
+% ── 段6：习题（9 级难度，30-40 道，含渐进提示+跨章回顾标记）──
 \section{习题}
-% 按 9 级难度排列，见 9.5 节
+
+% 难度 3+（普通及以上）的题配渐进提示，但提示内容放在独立附录中
+% 而非嵌入正文——这样自学者可以在不看提示的情况下独立完成。
+\begin{exercise}[5 ⭐⭐⭐⭐⭐ 中等] [回顾第N-1章]
+题目内容
+\end{exercise}
+\begin{hintref} L2/L3/L4 提示见本章提示附录 \end{hintref}
+
+% ── 先想后看门禁（习题区末尾，答案附录取向前）──
+\\begin{retrievalgatebox}
+翻答案之前，先做三件事：
+1. 用一句话说出本章核心概念。
+2. 有做错的题？找一道同类型、同难度的新题独立做一遍（重做原题只是默写答案，测不出真理解）。
+3. 选一道做对的题，讲给想象中的初学者听。
+\\end{retrievalgatebox}
+
+% ── 信心校准（习题区末尾）──
+\begin{confidencebox}
+做完本章后，你能用自己的话解释本章核心概念吗？
+如果不行，重读渐退例题序列。
+\end{confidencebox}
+
+% ── 提示附录文件（单独文件，每章一个）──
+% 新建 part0/chXX-hints.tex，包含所有 L2/L3/L4 提示
+% 在 book.tex 中 \include{part0/chXX-hints} 跟在主章节之后
 \end{lstlisting}
 
 每章深度目标（严格模式适用）：
@@ -469,12 +546,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 plt.rcParams.update({'font.family': 'sans-serif',
     'font.sans-serif': ['PingFang SC', 'Heiti SC'],
-    'font.size': 13, 'axes.unicode_minus': False})
+    'font.size': 13, 'axes.unicode_minus': False,
+    'pdf.fonttype': 42,    # 字体作为曲线嵌入，跨设备显示一致
+    'svg.fonttype': 'none',
+})
 fig, ax = plt.subplots(figsize=(8, 5))
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
 fig.savefig('figures/chXX_name.pdf', format='pdf', bbox_inches='tight')
 ```
+
+> **`pdf.fonttype: 42` 不可省略**：默认的 `fonttype=3` 将字体作为子集嵌入 PDF，部分查看器会缺字。`fonttype=42` 将字形转为曲线嵌入，确保教材 PDF 在任何设备（打印机、手机、网页预览）上都显示一致。
 
 ### 10.2 关键提醒
 
@@ -505,6 +587,7 @@ fig.savefig('figures/chXX_name.pdf', format='pdf', bbox_inches='tight')
 | 5 | **关键点散点图层级被曲线覆盖** | 散点画在曲线下面，用户看不清楚 | 设置 `zorder=5` 确保散点在最上层；加 `edgecolors='black'` 让点有边界，在彩色曲线上也清晰可见。 |
 | 6 | **多曲线共用同一张图的标注拥挤** | 标注文字重叠或指向不明 | 每条曲线的关键点用不同颜色散点区分。顶点用大红点（不论曲线颜色）+ 黑边。标注文字用与曲线同色的字体，加 `fontweight='bold'` 增强可读性。 |
 | 7 | **`ax.set_aspect('equal')` 被遗忘** | 圆看起来像椭圆，正方形看起来不像正方形 | 几何图（圆、对称关系图、正方形等）必须加上 `ax.set_aspect('equal')`。 |
+| 8 | **`pdf.fonttype` 未设为 42** | PDF 中文字在某些设备上缺失或显示异常 | 在 `rcParams` 中设置 `'pdf.fonttype': 42`（字体转曲线嵌入），`'svg.fonttype': 'none'`。mathplot.py 已默认启用。 |
 
 ### 10.5 figure 生成前检查清单
 
@@ -514,6 +597,7 @@ fig.savefig('figures/chXX_name.pdf', format='pdf', bbox_inches='tight')
 - [ ] 原点处无重复标注（默认刻度 `0` 就够了）
 - [ ] 对称关系图/圆等设了 `set_aspect('equal')`
 - [ ] 在开发环境中运行脚本无 `Missing character` 警告
+- [ ] `pdf.fonttype: 42` 已设置（字体曲线嵌入，跨设备一致）
 - [ ] 每张图在 PDF 中实际插入后，用人体工学检查：标注不拥挤、箭头指向清晰
 
 ---
@@ -574,7 +658,12 @@ cd project && tectonic book.tex
 - [ ] 每章结尾有「通往下一章」过渡桥梁？（3-8 行，回答"学会什么→引出什么→下章解决什么"）
 - [ ] 每章页数达到目标？严格模式 25-35 页，直觉模式 15-20 页
 - [ ] 每章例题 8-12 个？第一个完全展开不跳步
+- [ ] **例题渐退序列完整？** 至少包含：🔓完全展开 → 🔒₁去最后1步 → 🔒₂去最后2步 → 🔒₃只给开头
 - [ ] 习题 30-40 道，9 级难度全覆盖？
+- [ ] **渐进提示到位？** 难度 3+ 的习题配了 `hintref` 引用？提示内容在独立的 `chXX-hints.tex` 中？
+- [ ] **信心校准框存在？** 例题渐退中段 + 习题区末尾各一个 `confidencebox`
+- [ ] **先想后看门禁存在？** 习题区末尾有 `retrievalgatebox`
+- [ ] **间隔检索标记？** 至少 5 道习题标注了 `[回顾第N章]`
 - [ ] 至少 5 幅插图，且在正文中被引用（"如图 X 所示……"）
 - [ ] 每章开头有应用引导三问？
 - [ ] 所有新符号标注了读法？
@@ -612,12 +701,12 @@ for f in glob.glob('part*/*.tex'):
     b,e=t.count('\\\\begin{exercise}'),t.count('\\\\end{exercise}')
     if b!=e: print(f'{f}: begin={b}, end={e}')"
 
-# 3. examplebox 括号检查（防止 } 误写为 ]）
+# 3. examplebox/hintbox/confidencebox/retrievalgatebox 括号检查（防止 } 误写为 ]）
 python3 -c "import glob, re
 for f in glob.glob('part*/*.tex'):
     with open(f) as fh:
         for i,l in enumerate(fh,1):
-            if re.search(r'\\\\begin\{examplebox\}\[.*?\}', l):
+            if re.search(r'\\\\begin\\{(?:examplebox|hintbox|confidencebox|retrievalgatebox)\\}\\[.*?\\}', l):
                 print(f'{f}:{i}: } 误写 -> {l.rstrip()[:60]}')"
 
 # 4. 习题存在性检查（防止忘记写习题）
@@ -688,8 +777,12 @@ for f in ['book.tex']+glob.glob('part*/*.tex')+glob.glob('appendix/*.tex'):
 | 26 | **全角字符 `℃` `：` `【` `】` 在英文字体中** | `Missing character` | `℃`→`°C`；`【`→`[`；`】`→`]` |
 | 27 | **`openright` 产生空白页** | PDF 中出现空白页 | 改为 `\\documentclass[...,openany]{...}` |
 | 28 | **`\blacksquare` 修复脚本双重嵌套** | `\(\blacksquare\)\)` — 多余 `\)` | 字节级修复；`mathbook-pipeline.py fix mathmode` |
-| 29 | **`\]` 在 `\end{cases}`/`\end{aligned}` 之前** | `\begin{cases}...\]...\end{cases}` → `Missing $ inserted` | `\end{cases}` 必须早于 `\]`。正确：`\begin{cases}...\end{cases}\\]` |
-| 30 | **`\frac{...]{...}` 花括号混用方括号** | `\frac{dx]{x^2}` → `File ended while scanning \frac` | 全局搜索 `\frac{...]` 确保参数边界是 `{}` 非 `[]` |
+| 29 | **`\\]` 在 `\\end{cases}`/`\\end{aligned}` 之前** | `\\begin{cases}...\\]...\\end{cases}` → `Missing $ inserted` | `\\end{cases}` 必须早于 `\\]`。正确：`\\begin{cases}...\\end{cases}\\\\]`。批量修复：`cd project && python3 -c \"import glob,re; [exec(open(f).read().replace('\\\\\\]', '').replace('\\\\\\]', '') ) for ... ]\"` 或使用 `mathbook-pipeline.py fix pairing` |
+| 30 | **`\\frac{...]{...}` 花括号混用方括号** | `\\frac{dx]{x^2}` → `File ended while scanning \\frac` | 全局搜索 `\\frac{...]` 确保参数边界是 `{}` 非 `[]` |
+| 31 | **`\\[...\\]` 内中文未用 `\\text{}` 包裹** | 中文渲染为数学变量（斜体+间距错乱=乱码） | `\\[ \\mathbb{N} & \\text{自然数集：}\\\\{1,2,3\\\\} \\]`。所有中文/标点必须 `\\text{}`，数学符号（`\\mathbb`, `\\frac`, `\\sqrt`）例外。 |
+| 32 | **`\\begin{hintbox}[...}` 方括号闭合成花括号** | `Argument of \\hintbox has an extra }` | 把 `}` 改为 `]`。`\\begin{confidencebox}` 和 `\\begin{retrievalgatebox}` 同理（对照 #19 `examplebox` 同一类错误）。 |
+| 33 | **`∴`（Unicode U+2234）在文本或数学模式中** | `Missing character`——Times New Roman 不含 `∴` 字形 | 用 `\\(\\therefore\\)` 替代。同理 `∵`→`\\\\(\\because\\\\)`。 |
+| 34 | **tcolorbox 标题中的方括号 `[...]`** | PDF 中出现 `options@for=xxx` 乱码文本 | tcolorbox 的 `title=...` 参数中禁止使用方括号 `[]`，否则会被解析为可选参数。改用纯文字标题：`title=[提示]` → `title=提示`。`examplebox` 的第二个可选参数（如 `\begin{examplebox}[1——指数函数 🔓]`）不受此限制。 |
 ### 编译-修复循环（编译报错时工作流）
 
 编译报错后的标准操作：
@@ -706,7 +799,7 @@ for f in ['book.tex']+glob.glob('part*/*.tex')+glob.glob('appendix/*.tex'):
 
 | 错误信号 | 最可能的原因 | 修复 |
 |:---------|:------------|:-----|
-| `Argument of \\examplebox has an extra }` | `\begin{examplebox}[...}` 花括号误写 | 把 `}` 改为 `]` |
+| `Argument of \\\\examplebox has an extra }` | `\\begin{examplebox}[...}` 或 `\\begin{hintbox}[...}` 花括号误写 | 把 `}` 改为 `]` |
 | `Missing $ inserted` 在 `\end{exercise}` 行 | 习题中 `\[` 缺 `\]` 关闭 | 在 `\end{exercise}` 前补 `\]` |
 | `Missing $ inserted` 在 `\begin{examplebox}` 行 | 标题中有 `^`(如 `2^n`) 或 `_` 但没有 `$` 包裹 | 把 `2^n` 改为 `2的n次方`，或在整个标题外套 `{...}` |
 | `Missing $ inserted` 在含 `\blacksquare` 行 | `\blacksquare` 在数学模式外 | 改为 `\(...\blacksquare\)` |
@@ -729,10 +822,10 @@ for fpath in glob.glob('part*/*.tex'):
 
     changed = False
 
-    # 修复1：examplebox 的 } 误写为 ]
-    # 匹配 \begin{examplebox}[...} 模式，把最后一个 } 改为 ]
+    # 修复1：examplebox/hintbox/confidencebox/retrievalgatebox 的 } 误写为 ]
+    # 匹配 \\begin{xxx}[...} 模式，把最后一个 } 改为 ]
     fixed1 = re.sub(
-        r'(\\\\begin\{examplebox\}\[.*?)\\}',
+        r'(\\\\begin\\{(?:examplebox|hintbox|confidencebox|retrievalgatebox)\\}\\[.*?)\\\\}',
         r'\1]',
         text
     )
@@ -803,7 +896,40 @@ PYEOF
 
 ---
 
-## 十五、参考资料
+## 十五、自学教材教学设计原则（2026-07-15 新增）
+
+> 本节为摘要。完整实现指南、LaTeX 模板、研究引用见 **`references/self-study-pedagogy.md`**。
+> 原则提取自 [education-agent-skills](https://github.com/dongshuyan/education-agent-skills)（165 技能/20 领域），精选与成人自学数学教材最相关的 5 条研究支撑原则。
+
+### 15.1 五原则速览
+
+| # | 原则 | 一句话 | 落地位置 |
+|---|------|--------|---------|
+| 1 | **例题展开渐退** | 例题从"完全展开"逐步过渡到"独立完成"，渐退方向从末尾步骤到中间步骤 | 每章例题序列：例1 🔓 → 例2 🔒₁ → 例3 🔒₂ → 例4 🔒₃ → 例5+ 独立 |
+| 2 | **渐进提示梯** | 卡住时有四级提示（回顾章节→提醒定理→给出第一步→完整思路），而非直接翻答案 | 难度 4+ 的习题后紧跟 `hintbox`，按难度给 L2/L3/L4 |
+| 3 | **先想后看** | 翻答案之前做三件事：核心概念回顾→做一道同类新题→费曼讲解 | 每章习题区末尾的 `retrievalgatebox` |
+| 4 | **信心校准** | 做完题标信心等级，事后对照答案发现"信心-实际"差距 | 例2/例3后 + 习题区末尾各一个 `confidencebox` |
+| 5 | **间隔检索标记** | 习题中嵌入跨章回顾标记，无需读者自己安排复习计划 | 习题难度标记旁加 `[回顾第N章]`，间隔遵循 Cepeda 最优比 |
+
+### 15.2 落地优先级
+
+按投入产出比：**例题渐退 > 渐进提示 > 先想后看 ≈ 信心校准 > 间隔检索**。
+
+前两个直接影响学习效率，需要改动现有内容；后三个几乎零成本（加框即可），立即见效。
+
+### 15.3 新增 LaTeX 环境
+
+已在 9.3 节增加三个环境：
+
+| 环境 | 用途 | 触发位置 |
+|------|------|---------|
+| `hintref` | 灰色小框，引用提示附录 | 难度 3+ 习题后 |
+| `confidencebox` | 紫框，信心校准 | 例题渐退中段 + 习题区末尾 |
+| `retrievalgatebox` | 橙框，先想后看 | 习题区末尾，跨段到答案附录前 |
+
+---
+
+## 十六、参考资料
 
 - **《自学高数》**（88页/10章/62练习）：`~/zixue-gaoshu/`
 - **《数学 for AI》**（199页/72天/3卷/极致平滑）：`~/shuxue-for-ai/`
@@ -818,7 +944,10 @@ PYEOF
 - `references/project-reference.md` — 《自学高数》项目详情
 - `references/strict-mode-proofs.md` — 严格模式 ε-N/ε-δ 证明模板
 - `references/mathbook-pipeline.md` — 通用教材自动化管线文档（init/chapter/audit/fix/build/report）
+- `references/external-skill-evaluation.md` — 外部 skill 市场评估记录（skillsmp.com / skills.sh）
+- `references/self-study-pedagogy.md` — **自学教材教学设计原则**（5条原则+LaTeX模板+研究引用）
 - `scripts/precompile-fix.py` — 预编译修复脚本
+- `references/chapter-pedagogy-upgrade.md` — **章节教学设计升级工作流**（逐章自动化更新 5 条原则）
 
 ### 关联技能
 

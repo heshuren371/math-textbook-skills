@@ -142,11 +142,11 @@ math-analysis/
 
 | Skill | 行数 | 说明 |
 |-------|------|------|
-| **`latex-math-book-authoring`** | 828 行 | 🔥 教材全流程：读者画像→认知依赖图→元认知设计→大纲→撰写→矢量图→验证→编译 |
+| **`latex-math-book-authoring`** | 957 行 | 🔥 教材全流程：读者画像→认知依赖图→元认知设计→大纲→撰写→矢量图→验证→编译 |
 | **`latex-figure-drawing`** | 572 行 | Python + matplotlib 生成精确数学矢量图，替代手写 TikZ |
 | **`math-output-format`** | 708 行 | 数学解答输出规范、SymPy/Z3 验证、TinyTeX 编译 |
-| **`math-verification-pipeline`** | 450+ 行 | 数学验证管线：WolframScript、蒙特卡洛、对抗博弈分析 |
-| **`math-review`** | 800+ 行 | 数学审查：高考压轴题、几何证明、参数不等式深度分析 |
+| **`math-verification-pipeline`** | 563 行 | 数学验证管线：WolframScript、蒙特卡洛、对抗博弈分析 |
+| **`math-review`** | 1,052 行 | 数学审查：高考压轴题、几何证明、参数不等式深度分析 |
 | **`epsilon-n-delta-audit`** | 120+ 行 | ε-N/ε-δ 严格证明审计清单 |
 
 ### 安装到 Hermes Agent

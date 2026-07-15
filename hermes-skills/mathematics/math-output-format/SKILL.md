@@ -1,6 +1,6 @@
 ---
 name: math-output-format
-description: 数学解答输出的格式规范与工作流
+description: "Use when defining or enforcing mathematical answer output format standards and workflows — how mathematical reasoning, proofs, and solutions should be structured and presented. Unlike latex-figure-drawing (generates visual figures) or latex-math-book-authoring (generates full textbook content), math-output-format sets the presentation standards for mathematical content. Do NOT use for generating content (latex-math-book-authoring) or figures (latex-figure-drawing)."
 emoji: 📐
 color: "#1B5E20"
 ---

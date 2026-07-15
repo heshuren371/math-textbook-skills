@@ -34,6 +34,8 @@ plt.rcParams.update({
     'font.size': 11, 'axes.titlesize': 13, 'axes.labelsize': 11,
     'legend.fontsize': 9, 'xtick.labelsize': 9, 'ytick.labelsize': 9,
     'axes.grid': True, 'grid.alpha': 0.3,
+    # PDF 字体作为曲线嵌入，确保教材 PDF 在任何设备上都显示一致
+    'pdf.fonttype': 42, 'svg.fonttype': 'none',
 })
 
 

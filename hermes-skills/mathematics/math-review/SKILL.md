@@ -1,6 +1,6 @@
 ---
 name: math-review
-description: "Mathematical correctness review: numerical stability, property-based testing, symbolic verification, matrix health, precision analysis."
+description: "Use when reviewing mathematical content for correctness — numerical stability, property-based verification, proof checking, edge case analysis, and symbolic computation validation. Unlike scientific-figure-making (creates visual figures) or triangle-verification-team (multi-agent verification protocol), math-review is a human-readable mathematical correctness review of content. Do NOT use for generating figures (scientific-figure-making) or orchestrating verification agents (triangle-verification-team)."
 version: 1.0.0
 author: Hermes Agent (xiandaishuxuejia profile)
 license: MIT
@@ -147,6 +147,7 @@ Templates live at `workspace/math-templates/` (inside the profile):
 | matrix-health | `matrix-health.py` | `mathkit matrix` | Cond number, SVD, eigenvalue, rank analysis |
 | precision-compare | `precision-compare.py` | `mathkit precision` | float16/32/64 cross-precision error report |
 | convergence-viz | `convergence-viz.py` | `mathkit convergence` | Optimization trajectory, loss curve, gradient norm |
+| **kde-1d** | `utils_kde.py` (workspace/math-templates/) | 直接运行 `python3 utils_kde.py` | Self-contained KDE — Silverman 高斯核密度，无需 scipy |
 
 ## Workflow
 

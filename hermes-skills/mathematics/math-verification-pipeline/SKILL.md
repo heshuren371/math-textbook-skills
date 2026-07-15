@@ -1,6 +1,6 @@
 ---
 name: math-verification-pipeline
-description: 数学验证六模板架构——数值安全 + SymPy/Wolfram三轨验证 + Hypothesis 反例搜索 + 矩阵诊断 + 精度对比 + 收敛可视化
+description: "Use when running mathematical verification — numerical safety checks + SymPy/Wolfram triple-track verification + Hypothesis property-based testing + matrix diagnostics + precision comparison. Unlike jupyter-live-kernel (interactive Python via Jupyter) or math-review (human-readable correctness review), math-verification-pipeline is a structured automated verification system for mathematical results. Do NOT use for interactive exploration (jupyter-live-kernel) or text-based math review (math-review)."
 emoji: 🧪
 color: "#1B5E20"
 ---

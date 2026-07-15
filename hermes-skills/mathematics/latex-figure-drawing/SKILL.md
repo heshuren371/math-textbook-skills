@@ -1,6 +1,6 @@
 ---
 name: latex-figure-drawing
-description: 用 Python + matplotlib 生成精确的数学图形，导出为 PDF 矢量图供 LaTeX 插入，避免手写 tikz 坐标误差。涵盖几何图（角度/三角形/平行线/立体）和函数图的成熟模式。
+description: "Use when generating precise mathematical figures for LaTeX documents — uses Python + matplotlib to produce PDF vector graphics for insertion into LaTeX textbooks/papers, avoiding manual tikz coordinate errors. Unlike latex-math-book-authoring (full textbook content generation, not just figures) or math-output-format (output format specifications, not content), latex-figure-drawing focuses on high-precision mathematical figure generation. Do NOT use for writing textbook content (latex-math-book-authoring) or defining output formats (math-output-format)."
 emoji: 📊
 color: "#1565C0"
 ---
