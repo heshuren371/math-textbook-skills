@@ -157,16 +157,17 @@
   \ignorespaces
 }{\par\vspace{4pt}}
 
-% ── 好题标记适配（兼容现有习题系统）──
-% \GoodExercise{label} 放在 exercise 环境内，标记为好题
-% \GoodAnswer{label} 放在 answer 环境内，标记解析位置
+% ── 好题标记（最简单的用法）──
+% 在 exercise 里面写 \好题 就行，不用起名字
 \makeatletter
-\newcommand{\GoodExercise}[1]{%
-  \label{prob:#1}%
-  \GP@write{\string\GPentry{\theexercise}{#1}}%
+\newcommand{\好题}{%
+  \edef\@gp@label{ex:\thechapter-\arabic{exercise}}%
+  \label{prob:\@gp@label}%
+  \GP@write{\string\GPentry{\theexercise}{\@gp@label}}%
 }
-\newcommand{\GoodAnswer}[1]{%
-  \label{sol:#1}%
+\newcommand{\好答}{%
+  \edef\@gp@label{ex:\thechapter-\arabic{exercise}}%
+  \label{sol:\@gp@label}%
 }
 \makeatother
 
