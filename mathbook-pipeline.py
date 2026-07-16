@@ -32,8 +32,45 @@ from pathlib import Path
 VERSION = '2.0'
 CWD = Path.cwd()
 DOMAINS = ['structural', 'analysis', 'topology', 'algebra', 'number-theory']
-LEVELS = {'送分':0,'简单':1,'基础':2,'普通':3,'中等':4,'进阶':5,'拔高':6,'极难':7,'竞赛':8}
-LEVEL_NAMES = {v:k for k,v in LEVELS.items()}
+# ── Language & Exercise Configuration ──
+LANG = os.environ.get('MATHBOOK_LANG', 'zh')  # 'zh' or 'en'
+EXERCISE_TOTAL = int(os.environ.get('MATHBOOK_EXERCISES', '30'))
+
+LABELS = {
+    'en': dict(
+        doc_class='book',
+        app_box='What You Will Learn',
+        from_prev='From the Previous Chapter',
+        core='Core Content',
+        summary='Chapter Summary',
+        to_next="What's Next",
+        progress='Progress Check',
+        definition='Definition',
+        theorem='Theorem',
+        example='Example',
+        exercise_label='Exercise',
+        exercises=[('Warm-up',4),('Easy',4),('Basic',4),('Medium',5),
+                   ('Intermediate',5),('Advanced',4),('Challenge',3),('Expert',1)],
+    ),
+    'zh': dict(
+        doc_class='ctexbook',
+        app_box='学完本章你能做什么？',
+        from_prev='从上一章来',
+        core='核心内容',
+        summary='本章小结',
+        to_next='通往下一章',
+        progress='进步宣言',
+        definition='定义',
+        theorem='定理',
+        example='例题',
+        exercise_label='习题',
+        exercises=[('送分',4),('简单',4),('基础',4),('普通',5),
+                   ('中等',5),('进阶',4),('拔高',3),('极难',1)],
+    ),
+}
+L = LABELS.get(LANG, LABELS['en'])
+LEVELS = {name: i for i, (name, _) in enumerate(L['exercises'])}
+LEVEL_NAMES = {v: k for k, v in LEVELS.items()}
 
 # ══════════════════════════════════════════════════════
 # 工具函数
@@ -122,17 +159,18 @@ def find_unicode_toxins(text):
 # ══════════════════════════════════════════════════════
 
 def cmd_init(args):
-    title = args[0] if args else '数学教材'
-    print(f'📘 初始化教材项目: {title}')
+    title = args[0] if args else 'Math Textbook'
+    print(f'📘 Initializing: {title} (lang={LANG})')
     
     dirs = ['chapters','figures','shared','appendix']
     for d in dirs:
         (CWD / d).mkdir(exist_ok=True)
     
+    doc_class = L['doc_class']
     book_tex = f'''% ============================================================
 % {title}
 % ============================================================
-\\documentclass[12pt,a4paper,openany]{{ctexbook}}
+\\documentclass[12pt,a4paper,openany]{{{doc_class}}}
 \\input{{shared/preamble}}
 \\title{{\\Huge {title}}}
 \\author{{}}
@@ -141,30 +179,45 @@ def cmd_init(args):
 \\maketitle
 \\tableofcontents
 \\newpage
-%% 用 mathbook chapter add 添加章节
+%% Use: mathbook chapter add <id>
 \\end{{document}}
 '''
     save(CWD / 'book.tex', book_tex)
     
-    preamble = '''% ============================================================
-% 共享导言区
+    preamble = f'''% ============================================================
+% Shared preamble
 % ============================================================
-\\usepackage{amsmath,amssymb,amsthm}
-\\usepackage[a4paper,margin=2cm]{geometry}
-\\usepackage[most]{tcolorbox}
-\\usepackage{graphicx,array,booktabs,multirow}
-\\usepackage{hyperref,fancyhdr,listings,xcolor,enumitem}
-\\graphicspath{{figures/}}
-\\lstset{language=Python,basicstyle=\\small\\ttfamily,
-  backgroundcolor=\\color{gray!5},frame=single,numbers=left,
-  breaklines=true}
+\\usepackage{{amsmath,amssymb,amsthm}}
+\\usepackage[a4paper,margin=2cm]{{geometry}}
+\\usepackage[most]{{tcolorbox}}
+\\usepackage{{graphicx,array,booktabs,multirow}}
+\\usepackage{{hyperref,fancyhdr,listings,xcolor,enumitem}}
+\\graphicspath{{{{figures/}}}}
+\\lstset{{language=Python,basicstyle=\\small\\ttfamily,
+  backgroundcolor=\\color{{gray!5}},frame=single,numbers=left,
+  breaklines=true}}
 
-%% 定理环境（可自定义）
-\\newtcolorbox{definitionbox}[1][]{colback=green!5!white,colframe=green!60!black,fonttitle=\\bfseries,title={定义~#1}}
-\\newtcolorbox{theorembox}[1][]{colback=blue!5!white,colframe=blue!60!black,fonttitle=\\bfseries,title={定理~#1}}
-\\newtcolorbox{examplebox}[1][]{colback=orange!5!white,colframe=orange!70!black,fonttitle=\\bfseries,title={例题~#1}}
-\\newtcolorbox{applicationbox}{colback=teal!5!white,colframe=teal!60!black,fonttitle=\\bfseries\\large,title={学完本章你能做什么？}}
-\\newtcolorbox{progressbox}{colback=yellow!10!white,colframe=yellow!60!orange,fonttitle=\\bfseries\\large,title={进步宣言}}
+%% Theorem environments
+\\newtcolorbox{{definitionbox}}[1][]{{colback=green!5!white,colframe=green!60!black,fonttitle=\\bfseries,title={{{L['definition']}~#1}}}}
+\\newtcolorbox{{theorembox}}[1][]{{colback=blue!5!white,colframe=blue!60!black,fonttitle=\\bfseries,title={{{L['theorem']}~#1}}}}
+\\newtcolorbox{{examplebox}}[1][]{{colback=orange!5!white,colframe=orange!70!black,fonttitle=\\bfseries,title={{{L['example']}~#1}}}}
+\\newtcolorbox{{applicationbox}}{{colback=teal!5!white,colframe=teal!60!black,fonttitle=\\bfseries\\large,title={{{L['app_box']}}}}}
+\\newtcolorbox{{progressbox}}{{colback=yellow!10!white,colframe=yellow!60!orange,fonttitle=\\bfseries\\large,title={{{L['progress']}}}}}
+
+%% Exercise environment (counter-based, not a tcolorbox)
+\\newcounter{{exercise}}[chapter]
+\\renewcommand{{\\theexercise}}{{\\thechapter.\\arabic{{exercise}}}}
+\\newenvironment{{exercise}}[1][]{{%
+  \\refstepcounter{{exercise}}%
+  \\par\\vspace{{8pt}}%
+  \\noindent\\textbf{{\\theexercise}} \\textcolor{{gray}}{{(#1)}}\\quad
+}}{{\\par\\vspace{{4pt}}}}
+
+%% Answer environment (for appendix)
+\\newenvironment{{answer}}[1]{{
+  \\par\\vspace{{6pt}}%
+  \\noindent\\textbf{{#1}}\\quad
+}}{{\\par\\vspace{{4pt}}}}
 '''
     save(CWD / 'shared' / 'preamble.tex', preamble)
     
@@ -199,7 +252,7 @@ def cmd_chapter(args):
     
     if sub == 'new':
         ch_id = args[1]
-        title = args[2] if len(args) > 2 else f'第{ch_id}章'
+        title = args[2] if len(args) > 2 else f'{ch_id}'
         
         # 自动确定存放目录
         chapters_dir = CWD / 'chapters'
@@ -212,7 +265,7 @@ def cmd_chapter(args):
 \\chapter{{{title}}}
 
 \\begin{{applicationbox}}
-\\textbf{{学完本章你能做什么？}}
+\\textbf{{{L['app_box']}}}
 \\begin{{enumerate}}
   \\item
   \\item
@@ -220,24 +273,28 @@ def cmd_chapter(args):
 \\end{{enumerate}}
 \\end{{applicationbox}}
 
-%% 从这里开始写内容
-\\section{{从上一章来}}
+%% Write content below
+\\section{{{L['from_prev']}}}
 
-\\section{{核心内容}}
+\\section{{{L['core']}}}
 
 \\begin{{definitionbox}}[]\n\\end{{definitionbox}}
 \\begin{{examplebox}}[1]\n\\end{{examplebox}}
 
-\\section{{本章小结}}
+\\section{{{L['summary']}}}
 \\begin{{progressbox}}\n\\end{{progressbox}}
-\\subsection*{{通往下一章}}
+\\subsection*{{{L['to_next']}}}
 '''
-        # 如果存在 difficulty 练习模板，追加
-        for level_name, count in [('送分',4),('简单',4),('基础',4),('普通',5),('中等',5),('进阶',4),('拔高',3),('极难',1)]:
-            template += f'\n%% {"="*5} {level_name} {"="*5}\n'
-            for _ in range(count):
-                template += f'\\begin{{exercise}}[{level_name}] \\end{{exercise}}\n'
-        
+        # Exercises -- configurable count, distribute across levels
+        exercise_levels = L['exercises']
+        total_default = sum(n for _, n in exercise_levels)
+        scale = EXERCISE_TOTAL / total_default
+        sep = '=' * 5
+        for level_name, count in exercise_levels:
+            adjusted = max(1, round(count * scale))
+            template += '\n%% ' + sep + ' ' + level_name + ' ' + sep + '\n'
+            for _ in range(adjusted):
+                template += '\\begin{exercise}[' + level_name + '] \\end{exercise}\n'
         save(tex_path, template)
         ok(f'创建: {tex_path}')
         cmd_chapter(['add', ch_id])
