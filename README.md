@@ -4,7 +4,7 @@ Turn a math syllabus into a structured LaTeX textbook with consistent chapter fo
 
 ```yaml
 name: math-textbook-authoring
-description: "Use when the user wants to turn a math syllabus/outline into a structured LaTeX textbook — generates consistent chapter templates, applies domain-specific proof coverage audits (analysis/topology/algebra/number-theory), and enforces a delivery checklist before compilation. Unlike latex-math-book-authoring (writes textbook prose/content), this skill produces the LaTeX structure, format, and audit framework. Do NOT use for one-off LaTeX documents, non-math writing, or textbooks where the user has no syllabus."
+description: "Use when the user wants to turn a math syllabus/outline into a structured LaTeX textbook — generates consistent chapter templates, applies domain-specific proof coverage audits (analysis/topology/algebra/number-theory), and enforces a delivery checklist before compilation. Do NOT use for one-off LaTeX documents, non-math writing, or textbooks where the user has no syllabus."
 ```
 
 ## What it does
@@ -26,13 +26,28 @@ This skill has produced a 257-page mathematical analysis textbook (30 chapters, 
 cp SKILL.md ~/.hermes/profiles/<profile>/skills/mathematics/math-textbook-authoring/SKILL.md
 ```
 
-### Claude Code / Codex CLI
+Then load it: `skill_view(name='math-textbook-authoring')`
+
+### Claude Code
+
+Copy the skill to your project's skills directory — Claude auto-invokes it:
 
 ```bash
-# Load the skill as instructions:
-claude --instructions SKILL.md
-codex exec --instructions SKILL.md
+mkdir -p .claude/skills
+cp SKILL.md .claude/skills/math-textbook-authoring.md
 ```
+
+Then just say what you need: `"I have a linear algebra syllabus — help me structure the LaTeX."`
+
+### Codex CLI
+
+Codex reads `AGENTS.md` in your repo. Reference the skill there:
+
+```bash
+echo '[instructions](SKILL.md)' >> AGENTS.md
+```
+
+Or pipe it directly: `codex exec "$(cat SKILL.md) 帮我搭线性代数教材的章节结构"`
 
 ### Copy-paste
 
